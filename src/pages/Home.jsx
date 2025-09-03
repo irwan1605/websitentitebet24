@@ -26,12 +26,11 @@ export default function Home() {
       {/* konten website */}
       <Header />
       <Hero />
-      <FeatureGrid />
       <About />
+      <FeatureGrid />
       <Services />
       <Contact />
       <Footer />
-      
     </div>
   );
 }

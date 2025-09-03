@@ -5,7 +5,7 @@ import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import ContactForm from "./ContactForm";
 
 export default function Contact({
-  imageSrc = "/company/nti-company.png",
+  imageSrc = "/asset/logotansparannti.png",
   companyName = "PT. Naya Technological Indonesia",
   address = "JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapUrl = "https://maps.google.com/?q=JL.TEBET RAYA NO.24, SOUTH JAKARTA",
@@ -31,6 +31,9 @@ export default function Contact({
       aria-label="Kontak Perusahaan"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
+        <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
+        KONTAK KAMI
+      </div>
       {/* Grid: Info card & Image */}
       <div className="rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md p-6 md:p-8 text-white shadow-lg">
         {/* --- Kartu info perusahaan --- */}
@@ -69,7 +72,10 @@ export default function Contact({
               <Phone className="mt-0.5 h-5 w-5 text-sky-400 shrink-0" />
               <div>
                 <div className="font-medium">Telepon</div>
-                <a href={`tel:${phone.replace(/\s+/g, "")}`} className="hover:underline">
+                <a
+                  href={`tel:${phone.replace(/\s+/g, "")}`}
+                  className="hover:underline"
+                >
                   {phone}
                 </a>
                 <div className="text-xs opacity-70">
@@ -80,7 +86,7 @@ export default function Contact({
           </div>
 
           <div className="mt-6">
-          <a
+            <a
               href="https://mail.google.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -90,18 +96,6 @@ export default function Contact({
             >
               Kirim Email
             </a>
-
-            {/*
-              Jika ingin langsung ke jendela COMPOSE dengan penerima:
-              <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 text-white px-5 py-3 text-sm hover:bg-sky-400 transition"
-              >
-                Kirim Email
-              </a>
-            */}
           </div>
         </div>
 
@@ -116,8 +110,7 @@ export default function Contact({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
           className="relative rounded-3xl overflow-hidden cursor-pointer select-none"
-        >
-        </motion.figure>
+        ></motion.figure>
       </div>
 
       {/* --- FORM di bawah grid --- */}

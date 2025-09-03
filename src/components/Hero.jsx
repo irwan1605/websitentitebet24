@@ -154,7 +154,7 @@ export default function Hero() {
           transition={{ delay: 0.05, duration: 0.4 }}
           className="rounded-3xl border border-slate-200/30 bg-white/80 shadow-sm overflow-hidden backdrop-blur-sm"
         >
-          <div className="aspect-[16/11] grid md:grid-cols-2">
+          <div className="aspect-[16] grid md:grid-cols-2">
             {/* Panel kiri: GRID 2 kolom, mobile visible */}
             <div className="block bg-gradient-to-b from-slate-900 to-slate-700 text-slate-100 p-6">
               <div className="text-xs uppercase tracking-widest opacity-80">
@@ -199,14 +199,14 @@ export default function Hero() {
             </div>
 
             {/* Panel kanan: gambar/brand */}
-            <div className="relative bg-slate-100/70">
+            <div className="relative bg-slate-100/90">
               <img
-                src="/logonti1.png"
+                src="/src/assets/logotansparannti.png"
                 alt="Face scan"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-0 grid place-items-center">
-                <div className="w-56 h-40 md:w-72 md:h-56 border-4 border-sky-300/70 rounded-2xl" />
+                {/* <div className="w-56 h-40 md:w-72 md:h-56 border-4 border-sky-300/70 rounded-2xl" /> */}
               </div>
             </div>
           </div>
