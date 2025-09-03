@@ -95,7 +95,7 @@ export default function Hero() {
     >
       {/* Hapus komponen ini jika background sudah dipasang global di layout/Home */}
       <NAYAAnimatedBiometricBackground
-        imageUrl="/bg/fingeriris.png"
+        imageUrl="/bg/fingeriris1.png"
         primary="#38bdf8"
         secondary="#a78bfa"
         density={1}
@@ -156,7 +156,7 @@ export default function Hero() {
             {/* Panel kiri: GRID 2 kolom, mobile visible */}
             <div className="block bg-gradient-to-b from-slate-900 to-slate-700 text-slate-100 p-6">
               <div className="text-xs uppercase tracking-widest opacity-80">
-                Scanning
+                Scanning TECHNOLOGICAL
               </div>
 
               <div className="mt-8 grid grid-cols-1 gap-4 md:gap-16">

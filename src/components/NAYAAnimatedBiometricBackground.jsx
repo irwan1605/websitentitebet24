@@ -1,22 +1,27 @@
 import React, { useEffect, useRef } from "react";
 
 /**
- * NAYAAnimatedBiometricBackground.jsx
+ * NAYAAnimatedBiometricBackground.jsx (Universal Tech Theme)
  * --------------------------------------------------------------
- * Fullscreen animated background that blends your static image
- * (/bg/fingeriris.png) with iris/fingerprint-style rings, particles,
- * and a scanning sweep. No external dependencies.
+ * Fullscreen animated background that blends a static hero image
+ * (imageUrl) with a dynamic "universal technology" vibe:
+ * - Circuit/grid lines (hardware feel)
+ * - Network graph with pulsing nodes & links
+ * - Rotating globe wireframe (global scale)
+ * - Data sweep beam & lightweight packet particles
+ *
+ * Keeps the same API as the previous biometric version to avoid breaking changes.
  *
  * Props:
  *  - imageUrl: string (path to background image in /public)
  *  - primary: string (hex accent color)
  *  - secondary: string (hex accent color 2)
- *  - density: number (0.5..2) amount of particles/rings
+ *  - density: number (0.5..2) amount of elements
  *  - speed: number (0.5..2) animation speed
  *  - overlayOpacity: number (0..1) dark overlay for text contrast
  */
 export default function NAYAAnimatedBiometricBackground({
-  imageUrl = "/bg/fingeriris.png",
+  imageUrl = "/bg/fingeriris1.png", // ganti ke /bg/tech-universal.jpg jika punya
   primary = "#38bdf8",
   secondary = "#a78bfa",
   density = 1,
@@ -46,17 +51,14 @@ export default function NAYAAnimatedBiometricBackground({
     resize();
     window.addEventListener("resize", onResize);
 
-    // Handle reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    // Pause when tab is hidden (saves battery)
     let paused = document.hidden || prefersReducedMotion;
     const onVisibilityChange = () => {
       paused = document.hidden || prefersReducedMotion;
       if (!paused) {
-        // resume loop
         last = performance.now();
         rafRef.current = requestAnimationFrame(loop);
       }
@@ -67,26 +69,45 @@ export default function NAYAAnimatedBiometricBackground({
     const img = new Image();
     img.src = imageUrl;
 
-    // ---- Scene elements
-    const baseCount = Math.floor(70 * density);
-    const particles = new Array(baseCount).fill(0).map(() => {
-      const r = Math.min(w, h) * (0.15 + 0.6 * Math.random());
-      const a = Math.random() * Math.PI * 2;
-      const s = (0.12 + Math.random() * 0.55) * speed; // angular speed
-      const size = 1 + Math.random() * 2.2;
-      const hueMix = Math.random();
-      return { r, a, s, size, hueMix };
-    });
+    // ---- Scene data -------------------------------------------------
+    // Network graph (nodes + links)
+    const NODE_COUNT = Math.floor(18 * density);
+    const nodes = new Array(NODE_COUNT).fill(0).map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: 1.2 + Math.random() * 1.8,
+      t: Math.random() * 1000, // phase for pulse
+    }));
+    // build sparse links: each node connects to k random others
+    const K = 2;
+    const links = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let k = 0; k < K; k++) {
+        const j = Math.floor(Math.random() * nodes.length);
+        if (j !== i) links.push([i, j, Math.random() * 1]);
+      }
+    }
 
-    const rings = new Array(Math.max(6, Math.floor(12 * density)))
-      .fill(0)
-      .map((_, i) => ({
-        r: 42 + i * (Math.min(w, h) / (17 / density)),
-        rotSpeed: ((i % 2 ? -1 : 1) * (0.25 + i * 0.035)) * speed,
-        dash: 6 + (i % 3) * 4,
-        gap: 12 + (i % 4) * 8,
-        alpha: 0.06 + (i % 3) * 0.03,
-      }));
+    // Packet-like particles (small squares drifting)
+    const PACKETS = Math.floor(70 * density);
+    const packets = new Array(PACKETS).fill(0).map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      s: (0.2 + Math.random() * 0.8) * speed, // speed
+      sz: 0.8 + Math.random() * 1.8, // size
+      dir: Math.random() * Math.PI * 2,
+      hueMix: Math.random(),
+    }));
+
+    // Grid spacing
+    const GRID = Math.max(24, Math.min(42, 36 / Math.sqrt(density)));
+
+    // Globe parameters
+    const globe = {
+      cx: () => w * 0.65,
+      cy: () => h * 0.55,
+      r: () => Math.min(w, h) * 0.42,
+    };
 
     const mix = (c1, c2, t) => {
       const p = (h) => [
@@ -102,14 +123,12 @@ export default function NAYAAnimatedBiometricBackground({
       return `rgb(${r},${g},${b})`;
     };
 
-    // ---- Draw helpers
+    // ---- Draw helpers -----------------------------------------------
     const drawImageLayer = (now) => {
-      // Parallax drift
       const driftX = Math.sin((now / 8000) * speed) * 10;
       const driftY = Math.cos((now / 9000) * speed) * 8;
 
       if (img.complete && img.naturalWidth > 0) {
-        // cover
         const ratio = Math.max(w / img.width, h / img.height);
         const iw = img.width * ratio;
         const ih = img.height * ratio;
@@ -117,7 +136,6 @@ export default function NAYAAnimatedBiometricBackground({
         const iy = (h - ih) / 2 + driftY;
         ctx.drawImage(img, ix, iy, iw, ih);
       } else {
-        // fallback gradient
         const grad = ctx.createLinearGradient(0, 0, w, h);
         grad.addColorStop(0, "#07121f");
         grad.addColorStop(1, "#0b1730");
@@ -130,91 +148,134 @@ export default function NAYAAnimatedBiometricBackground({
       ctx.fillRect(0, 0, w, h);
     };
 
-    const drawScanSweep = (cx, cy, now) => {
-      const radius = Math.min(w, h) * 0.58;
-      const angle = ((now / 2800) * speed) % (Math.PI * 2);
-      const grad = ctx.createRadialGradient(
-        cx,
-        cy,
-        radius * 0.15,
-        cx,
-        cy,
-        radius
-      );
-      grad.addColorStop(0, "rgba(255,255,255,0.05)");
-      grad.addColorStop(1, "rgba(255,255,255,0)");
+    const drawCircuitGrid = (now) => {
       ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.arc(0, 0, radius, -0.28, 0.28);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
+      ctx.lineWidth = 1;
+      const t = (now / 1200) * speed;
+      for (let x = 0; x < w; x += GRID) {
+        const alpha = 0.04 + 0.03 * Math.sin(t + x * 0.02);
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += GRID) {
+        const alpha = 0.04 + 0.03 * Math.cos(t + y * 0.02);
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+      // occasional glowing junctions
+      for (let i = 0; i < 18 * density; i++) {
+        const gx = Math.floor(Math.random() * (w / GRID)) * GRID + GRID / 2;
+        const gy = Math.floor(Math.random() * (h / GRID)) * GRID + GRID / 2;
+        ctx.beginPath();
+        ctx.arc(gx, gy, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `${primary}66`;
+        ctx.fill();
+      }
       ctx.restore();
     };
 
-    const drawRings = (cx, cy, now) => {
-      rings.forEach((ring, i) => {
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(((now / 1000) * ring.rotSpeed * Math.PI) / 180);
-        ctx.lineWidth = 1.2 + (i % 2) * 0.8;
-        ctx.strokeStyle = `rgba(255,255,255,${ring.alpha})`;
-        ctx.setLineDash([ring.dash, ring.gap]);
+    const drawNetworkGraph = (now) => {
+      const pulse = 0.5 + 0.5 * Math.sin((now / 700) * speed);
+      // links
+      links.forEach(([a, b, wgt]) => {
+        const na = nodes[a];
+        const nb = nodes[b];
         ctx.beginPath();
-        ctx.arc(0, 0, ring.r, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.restore();
-      });
-    };
-
-    const drawParticles = (cx, cy, dt) => {
-      particles.forEach((p) => {
-        p.a += (p.s * dt) / 1000;
-        const x = cx + Math.cos(p.a) * p.r;
-        const y = cy + Math.sin(p.a) * p.r;
-
-        // tail
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(
-          cx + Math.cos(p.a - 0.16) * (p.r - 8),
-          cy + Math.sin(p.a - 0.16) * (p.r - 8)
-        );
-        ctx.strokeStyle = `rgba(255,255,255,${0.05 + p.hueMix * 0.07})`;
+        ctx.moveTo(na.x, na.y);
+        ctx.lineTo(nb.x, nb.y);
+        ctx.strokeStyle = `rgba(255,255,255,${0.05 + wgt * 0.08})`;
         ctx.lineWidth = 1;
         ctx.stroke();
-
-        // node
+      });
+      // nodes
+      nodes.forEach((n, i) => {
+        n.t += 0.02 * speed;
+        const sz = n.r + Math.sin(n.t) * 0.6 * (i % 3 === 0 ? 1.2 : 1);
         ctx.beginPath();
-        ctx.arc(x, y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = mix(primary, secondary, p.hueMix);
-        ctx.globalAlpha = 0.9;
+        ctx.arc(n.x, n.y, Math.max(1, sz), 0, Math.PI * 2);
+        ctx.fillStyle = mix(primary, secondary, pulse);
+        ctx.globalAlpha = 0.85;
         ctx.fill();
         ctx.globalAlpha = 1;
       });
     };
 
-    const drawCore = (cx, cy, now) => {
-      const coreR = Math.min(w, h) * 0.095;
-      const pulse = 0.5 + 0.5 * Math.sin((now / 700) * speed);
-      const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR * 1.7);
-      rg.addColorStop(0, `${primary}AA`);
-      rg.addColorStop(1, `${secondary}00`);
-      ctx.fillStyle = rg;
-      ctx.beginPath();
-      ctx.arc(cx, cy, coreR * 1.7, 0, Math.PI * 2);
-      ctx.fill();
+    const drawGlobeWireframe = (now) => {
+      const cx = globe.cx();
+      const cy = globe.cy();
+      const r = globe.r();
+      const rot = ((now / 6000) * speed) % (Math.PI * 2);
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(rot);
+      ctx.strokeStyle = "rgba(255,255,255,0.08)";
+      ctx.lineWidth = 1;
 
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = mix(primary, secondary, pulse);
-      ctx.setLineDash([8, 10]);
+      // longitudes
+      for (let i = -5; i <= 5; i++) {
+        ctx.save();
+        ctx.rotate((i * Math.PI) / 12);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, r, r * 0.35, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+      // latitudes
+      for (let j = -3; j <= 3; j++) {
+        const rr = r * Math.cos((j * Math.PI) / 8);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, rr, rr * 0.35, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // equator glow
       ctx.beginPath();
-      ctx.arc(cx, cy, coreR + pulse * 8, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, r, r * 0.35, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = `${primary}44`;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
-      ctx.setLineDash([]);
+      ctx.restore();
+    };
+
+    const drawDataSweep = (now) => {
+      const angle = ((now / 3000) * speed) % (Math.PI * 2);
+      ctx.save();
+      ctx.translate(w / 2, h / 2);
+      ctx.rotate(angle);
+      const grd = ctx.createLinearGradient(-w, 0, w, 0);
+      grd.addColorStop(0, "rgba(255,255,255,0)");
+      grd.addColorStop(0.5, `${secondary}22`);
+      grd.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = grd;
+      ctx.fillRect(-w, -h, w * 2, h * 2);
+      ctx.restore();
+    };
+
+    const drawPackets = (dt) => {
+      packets.forEach((p) => {
+        p.x += Math.cos(p.dir) * p.s * (dt / 16);
+        p.y += Math.sin(p.dir) * p.s * (dt / 16);
+        // wrap
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.dir);
+        ctx.fillStyle = mix(primary, secondary, p.hueMix);
+        ctx.globalAlpha = 0.9;
+        ctx.fillRect(-p.sz / 2, -p.sz / 2, p.sz, p.sz);
+        ctx.globalAlpha = 1;
+        ctx.restore();
+      });
     };
 
     let last = performance.now();
@@ -231,19 +292,18 @@ export default function NAYAAnimatedBiometricBackground({
 
       // layers
       drawImageLayer(now);
-      const cx = w / 2,
-        cy = h / 2;
-      drawRings(cx, cy, now);
-      drawScanSweep(cx, cy, now);
-      drawCore(cx, cy, now);
-      drawParticles(cx, cy, dt);
+      drawCircuitGrid(now);
+      drawNetworkGraph(now);
+      drawGlobeWireframe(now);
+      drawDataSweep(now);
+      drawPackets(dt);
 
-      // outer glow ring
-      ctx.beginPath();
-      ctx.arc(cx, cy, Math.min(w, h) * 0.46, 0, Math.PI * 2);
-      ctx.strokeStyle = `${primary}22`;
-      ctx.lineWidth = 6;
-      ctx.stroke();
+      // subtle vignette
+      const vg = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.6, w / 2, h / 2, Math.max(w, h));
+      vg.addColorStop(0, "rgba(0,0,0,0)");
+      vg.addColorStop(1, "rgba(0,0,0,0.3)");
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, w, h);
 
       rafRef.current = requestAnimationFrame(loop);
     };
