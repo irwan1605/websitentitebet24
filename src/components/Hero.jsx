@@ -199,9 +199,9 @@ export default function Hero() {
             </div>
 
             {/* Panel kanan: gambar/brand */}
-            <div className="relative bg-slate-100/90">
+            <div className="relative bg-slate-100/70">
               <img
-                src="src/assets/logotansparannti.png"
+                src="bg/logotansparannti.png"
                 alt="Face scan"
                 className="h-full w-full object-cover"
               />
