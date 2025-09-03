@@ -16,15 +16,13 @@ export default function Hero() {
       key: "fingerprint",
       label: "Fingerprint",
       img: "/icons/fingerprint.svg",
-      desc:
-        "Fingerprint mengenali pola minutiae (ridge ending & bifurcation) pada sidik jari. Banyak dipakai untuk absensi, akses kontrol, hingga perbankan karena cepat dan ekonomis.",
+      desc: "Fingerprint mengenali pola minutiae (ridge ending & bifurcation) pada sidik jari. Banyak dipakai untuk absensi, akses kontrol, hingga perbankan karena cepat dan ekonomis.",
     },
     {
       key: "iris",
       label: "Iris",
       img: "/icons/iris.svg",
-      desc:
-        "Iris recognition membaca tekstur unik pada iris menggunakan cahaya NIR. Akurasinya sangat tinggi, cocok untuk skenario keamanan kritikal dan identifikasi massal.",
+      desc: "Iris recognition membaca tekstur unik pada iris menggunakan cahaya NIR. Akurasinya sangat tinggi, cocok untuk skenario keamanan kritikal dan identifikasi massal.",
     },
   ];
 
@@ -120,8 +118,12 @@ export default function Hero() {
             </span>
           </h1>
           <p className="mt-3 text-slate-200 leading-relaxed max-w-xl">
-            Kami pionir teknologi biometrik, spesialis pengenalan wajah—untuk
-            pemindaian langsung, CCTV, dan perangkat mobile.
+            Kami Perusahaan yang bergerak di bidang teknologi software dan
+            hardware secara global adalah bisnis yang merancang, memproduksi,
+            dan menjual solusi terpadu—perangkat (device/sensor/board) beserta
+            perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan
+            R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual Domestik dan 
+            lintas negara.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">

@@ -32,7 +32,7 @@ export default function Contact({
       className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
       {/* Grid: Info card & Image */}
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div className="rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md p-6 md:p-8 text-white shadow-lg">
         {/* --- Kartu info perusahaan --- */}
         <div className="rounded-3xl border border-white/10 bg-white/10 backdrop-blur-md p-6 md:p-8 text-white shadow-lg">
           <h2 className="text-2xl md:text-3xl font-extrabold">Hubungi Kami</h2>
