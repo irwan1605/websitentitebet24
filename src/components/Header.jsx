@@ -33,7 +33,7 @@ export default function Header() {
             alt="Logo"
             className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain border-2 border-sky-400 shadow-md rounded-lg"
           />
-          <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-sky-400 animate-glow animate-shimmer whitespace-nowrap">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-sky-800 animate-glow animate-shimmer whitespace-nowrap">
             {lang === "id"
               ? "NAYA TECHNOLOGICAL INDONESIA"
               : "NAYA TECHNOLOGICAL INDONESIA"}

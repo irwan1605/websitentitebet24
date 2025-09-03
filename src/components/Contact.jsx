@@ -80,12 +80,28 @@ export default function Contact({
           </div>
 
           <div className="mt-6">
-            <a
-              href={`mailto:${email}`}
+          <a
+              href="https://mail.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 text-white px-5 py-3 text-sm hover:bg-sky-400 transition"
+              aria-label="Buka Gmail"
+              title="Buka Gmail"
             >
               Kirim Email
             </a>
+
+            {/*
+              Jika ingin langsung ke jendela COMPOSE dengan penerima:
+              <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 text-white px-5 py-3 text-sm hover:bg-sky-400 transition"
+              >
+                Kirim Email
+              </a>
+            */}
           </div>
         </div>
 

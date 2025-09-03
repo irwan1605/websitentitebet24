@@ -3,11 +3,11 @@ export default function About() {
   return (
     <section
       id="tentang"
-      className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16"
+      className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16"
     >
-      <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-sky-50 p-6 lg:p-10">
-        <h2 className="text-xl md:text-2xl font-bold">Tentang NTI</h2>
-        <p className="mt-2 text-slate-700 max-w-3xl">
+      <div className="rounded-3xl border-slate-200 bg-gradient-to-br from-indigo-50 to-sky-50 p-6 lg:p-10">
+        <h2 className="text-xl md:text-2xl text-center font-bold">Tentang PT. NAYA TECHNOLOGICAL INDONESIA</h2>
+        <p className="mx-auto mt-2 text-slate-800 leading-relaxed  max-w-3xl">
           Kami Perusahaan yang bergerak di bidang teknologi software dan
           hardware secara global adalah bisnis yang merancang, memproduksi, dan
           menjual solusi terpadu—perangkat (device/sensor/board) beserta
