@@ -11,9 +11,9 @@ export const NAV = [
 
 
 export const FEATURES = [
-{ icon: Camera, title: 'Pengenalan Wajah CCTV', desc: 'Identifikasi wajah real‑time dari feed CCTV.' },
-{ icon: MonitorSmartphone, title: 'Integrasi Webcam & Mobile', desc: 'SDK ringan untuk desktop & mobile.' },
-{ icon: LineChart, title: 'Pencarian Foto/Video', desc: 'Pencarian individu dari arsip media.' },
+{ icon: Camera, title: 'Perangkat (device/sensor/board) ', desc: 'Pengadaan perangkat lunak (firmware, aplikasi, cloud/API).' },
+{ icon: MonitorSmartphone, title: 'mengoperasikan R&D dan Manufaktur', desc: 'SDK ringan untuk desktop & mobile.' },
+{ icon: LineChart, title: 'Distribusi dan Pemasaran', desc: 'Pencarian individu dari arsip media.' },
 { icon: ShieldCheck, title: 'Keamanan & Privasi', desc: 'Enkripsi & kontrol akses berjenjang.' },
 { icon: BadgeCheck, title: 'Akurasi Terverifikasi', desc: 'Metrik FMR/TPR transparan.' },
 { icon: Cpu, title: 'Optimasi Edge', desc: 'Cepat & hemat daya di edge devices.' },
