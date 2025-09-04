@@ -5,7 +5,6 @@ import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import ContactForm from "./ContactForm";
 
 export default function Contact({
-  imageSrc = "/asset/logotansparannti.png",
   companyName = "PT. Naya Technological Indonesia",
   address = "JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapUrl = "https://maps.google.com/?q=JL. TEBET RAYA NO.24, SOUTH JAKARTA",
@@ -58,7 +57,7 @@ export default function Contact({
       aria-label="Kontak Perusahaan"
       className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
-      <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-700 dark:text-slate-200 font-semibold text-center p-4">
+      <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
         KONTAK KAMI
       </div>
 
