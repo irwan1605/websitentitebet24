@@ -24,4 +24,8 @@
   animation: shimmer 4s ease-in-out infinite;
 }
 
+.font-brand {
+  font-family: "Audiowide", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+}
+
 

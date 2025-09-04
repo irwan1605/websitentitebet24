@@ -24,8 +24,8 @@ export default function Header() {
   const [lang, setLang] = useState("id"); // default bahasa Indonesia
 
   return (
-    <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-md shadow-md">
-      <div className="mx-auto max-w-7xl h-20 px-4 sm:px-6 lg:px-12 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white/20 backdrop-blur-md shadow-md">
+      <div className="mx-auto max-w-7xl h-20 px-2 sm:px-6 lg:px-12 flex items-center justify-between">
         {/* Logo + Teks */}
         <a href="#beranda" className="flex items-center gap-4 sm:gap-6 font-semibold">
           <img
@@ -33,7 +33,7 @@ export default function Header() {
             alt="Logo"
             className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain border-2 border-sky-400 shadow-md rounded-lg"
           />
-          <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-sky-800 animate-glow animate-shimmer whitespace-nowrap">
+          <h1 className=" font-brand uppercase tracking-wider text-lg sm:text-xl md:text-1xl font-extrabold text-blue-400 animate-glow animate-shimmer whitespace-nowrap">
             {lang === "id"
               ? "NAYA TECHNOLOGICAL INDONESIA"
               : "NAYA TECHNOLOGICAL INDONESIA"}
@@ -41,18 +41,18 @@ export default function Header() {
         </a>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-sm">
+        <nav className="font-extrabold tracking-tight text-white hover:text-white hidden md:flex items-center gap-8 lg:gap-10 text-sm ">
           {NAV[lang].map((n) => (
             <a
               key={n.id}
               href={`#${n.id}`}
-              className="hover:text-sky-600 text-slate-700 transition-colors"
+              className="hover:text-sky-600 font-extrabold tracking-tight text-white text-slate-700 transition-colors"
             >
               {n.label}
             </a>
           ))}
           {/* Divider */}
-          <div className="h-5 w-px bg-slate-300" />
+          <div className="h-5 w-px bg-slate-300 font-extrabold tracking-tight text-white" />
           <button
             onClick={() => setLang("id")}
             className={`${

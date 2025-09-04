@@ -199,16 +199,13 @@ export default function Hero() {
             </div>
 
             {/* Panel kanan: gambar/brand */}
-            <div className="relative bg-slate-100/70">
-              <img
-                src="bg/logotansparannti.png"
-                alt="Face scan"
-                className="h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 grid place-items-center">
-                {/* <div className="w-56 h-40 md:w-72 md:h-56 border-4 border-sky-300/70 rounded-2xl" /> */}
-              </div>
-            </div>
+            <div className="relative bg-slate-100/70 flex items-center justify-center py-10">
+  <img
+    src="/bg/logotansparannti.png"
+    alt="Logo NTI"
+    className="w-[80%] h-auto object-contain"
+  />
+</div>
           </div>
         </motion.div>
       </div>
