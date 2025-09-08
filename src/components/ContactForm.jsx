@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
 
-export default function ContactForm({ waNumber = "082211174447" }) {
+export default function ContactForm({ waNumber = "081460870870" }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
