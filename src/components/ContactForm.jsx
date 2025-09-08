@@ -131,9 +131,7 @@ export default function ContactForm({ waNumber = "082211174447" }) {
         </a> */}
       </div>
 
-      <p className="text-xs text-slate-500 dark:text-slate-400">
-        * Tombol “Kirim Pesan” akan membuka WhatsApp (Web/Apk) ke nomor 0822-1117-4447 dengan pesan dari form.
-      </p>
+      <p className="text-xs text-slate-500 dark:text-slate-400"></p>
     </form>
   );
 }
