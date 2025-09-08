@@ -45,7 +45,7 @@ export default function About() {
         <h2 className="text-xl md:text-2xl text-center font-bold">
           PT. NAYA TECHNOLOGICAL INDONESIA
         </h2>
-        <p className="mx-auto mt-2 text-slate-800 leading-relaxed max-w-3xl">
+        <p className="mx-auto p-4 mt-2 text-slate-800 leading-relaxed max-w-3xl">
           Kami Perusahaan yang bergerak di bidang teknologi software dan
           hardware secara global adalah bisnis yang merancang, memproduksi, dan
           menjual solusi terpadu—perangkat (device/sensor/board) beserta

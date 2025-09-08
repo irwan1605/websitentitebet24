@@ -10,7 +10,7 @@ export default function Contact({
   mapUrl = "https://maps.google.com/?q=JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapEmbedUrl, // opsional: jika tak disediakan, dibuat otomatis dari address
   email = "contact@nayatechnologi.id",
-  phone = "+62 21-XXXX-XXXX",
+  phone = "+622-1388-25307",
 
   // 🔧 Posisi marker dalam persen relatif ke kartu peta (default kira2 pusat)
   marker = { xPercent: 52, yPercent: 48 },
@@ -110,7 +110,6 @@ export default function Contact({
                   {phone}
                 </a>
                 <div className="text-xs text-slate-500 dark:text-slate-400">
-                  *Ganti dengan nomor operasional
                 </div>
               </div>
             </div>
