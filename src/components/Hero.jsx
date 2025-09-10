@@ -1,28 +1,28 @@
+// src/components/Hero.jsx
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Globe2, CheckCircle, X } from "lucide-react";
-import NAYAAnimatedBiometricBackground from "./NAYAAnimatedBiometricBackground.jsx"; // sesuaikan path
+import { useLanguage } from "../context/LanguageContext.jsx";
+import NAYAAnimatedBiometricBackground from "./NAYAAnimatedBiometricBackground.jsx";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
+  // Item teknologi untuk panel kiri & modal
   const scanItems = [
-    // {
-    //   key: "biometric",
-    //   label: "Biometric",
-    //   img: "/icons/biometric.svg",
-    //   desc:
-    //     "Biometric adalah autentikasi berbasis ciri unik manusia (wajah, sidik jari, iris, suara). Keunggulan: sulit dipalsukan, cepat, dan nyaman tanpa perlu mengingat kata sandi.",
-    // },
     {
       key: "fingerprint",
-      label: "Fingerprint",
+      label: t("hero.scan.fingerprint.label"),
       img: "/icons/fingerprint.svg",
-      desc: "Fingerprint mengenali pola minutiae (ridge ending & bifurcation) pada sidik jari. Banyak dipakai untuk absensi, akses kontrol, hingga perbankan karena cepat dan ekonomis.",
+      desc: t("hero.scan.fingerprint.desc"),
+      modalTitle: t("hero.scan.fingerprint.modalTitle"),
     },
     {
       key: "iris",
-      label: "Iris",
+      label: t("hero.scan.iris.label"),
       img: "/icons/iris.svg",
-      desc: "Iris recognition membaca tekstur unik pada iris menggunakan cahaya NIR. Akurasinya sangat tinggi, cocok untuk skenario keamanan kritikal dan identifikasi massal.",
+      desc: t("hero.scan.iris.desc"),
+      modalTitle: t("hero.scan.iris.modalTitle"),
     },
   ];
 
@@ -109,21 +109,14 @@ export default function Hero() {
           transition={{ duration: 0.4 }}
         >
           <p className="text-sm uppercase tracking-widest text-slate-200 font-semibold">
-            Technology Biometric • NAYA TECHNOLOGICAL INDONESIA
+            {t("hero.kicker")}
           </p>
           <h1 className="mt-2 text-3xl md:text-5xl font-extrabold tracking-tight text-white">
-            Selamat Datang di
-            <span className="block text-sky-400">
-              NAYA TECHNOLOGICAL INDONESIA
-            </span>
+            {t("hero.welcome")}
+            <span className="block text-sky-400">{t("brand")}</span>
           </h1>
           <p className="mt-3 text-slate-200 leading-relaxed max-w-xl">
-            Kami Perusahaan yang bergerak di bidang teknologi software dan
-            hardware secara global adalah bisnis yang merancang, memproduksi,
-            dan menjual solusi terpadu—perangkat (device/sensor/board) beserta
-            perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan
-            R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual Domestik dan 
-            lintas negara.
+            {t("hero.body")}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -131,23 +124,23 @@ export default function Hero() {
               href="#kontak"
               className="inline-flex items-center gap-2 rounded-2xl bg-slate-900/80 text-white px-5 py-3 text-sm hover:bg-slate-800/90 backdrop-blur-sm"
             >
-              Konsultasi Gratis <ChevronRight className="h-4 w-4" />
+              {t("hero.ctaConsult")} <ChevronRight className="h-4 w-4" />
             </a>
             <a
               href="#fitur"
               className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/40 bg-white/80 backdrop-blur-sm px-5 py-3 text-sm hover:bg-slate-50/90"
             >
-              Lihat Fitur <ChevronRight className="h-4 w-4" />
+              {t("hero.ctaFeatures")} <ChevronRight className="h-4 w-4" />
             </a>
           </div>
 
           <div className="mt-6 flex items-center gap-3 text-sm text-slate-200">
             <Globe2 className="h-4 w-4" />
-            <span>Implementasi di perusahaan & institusi publik.</span>
+            <span>{t("hero.implementLine")}</span>
           </div>
         </motion.div>
 
-        {/* Kanan: kartu dengan grid 2 kolom; mobile-friendly (tanpa hidden) */}
+        {/* Kanan: kartu dengan grid 2 kolom; mobile-friendly */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -155,10 +148,10 @@ export default function Hero() {
           className="rounded-3xl border border-slate-200/30 bg-white/80 shadow-sm overflow-hidden backdrop-blur-sm"
         >
           <div className="aspect-[16] grid md:grid-cols-2">
-            {/* Panel kiri: GRID 2 kolom, mobile visible */}
+            {/* Panel kiri */}
             <div className="block bg-gradient-to-b from-slate-900 to-slate-700 text-slate-100 p-6">
               <div className="text-xs uppercase tracking-widest opacity-80">
-                Scanning TECHNOLOGICAL
+                {t("hero.scan.heading")}
               </div>
 
               <div className="mt-8 grid grid-cols-1 gap-4 md:gap-16">
@@ -200,17 +193,17 @@ export default function Hero() {
 
             {/* Panel kanan: gambar/brand */}
             <div className="relative bg-slate-100/70 flex items-center justify-center py-10">
-  <img
-    src="/bg/logotansparannti.png"
-    alt="Logo NTI"
-    className="w-[80%] h-auto object-contain"
-  />
-</div>
+              <img
+                src="/bg/logotansparannti.png"
+                alt="Logo NTI"
+                className="w-[80%] h-auto object-contain"
+              />
+            </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Modal/Card detail dengan fade-in/out lembut + focus trap */}
+      {/* Modal/Card detail */}
       <AnimatePresence>
         {current && (
           <motion.div
@@ -251,14 +244,14 @@ export default function Hero() {
                   />
                 </div>
                 <h3 id="tech-title" className="text-lg font-semibold">
-                  {current.label} Technology
+                  {current.modalTitle}
                 </h3>
                 <button
                   ref={closeBtnRef}
                   type="button"
                   onClick={() => setOpenKey(null)}
                   className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-sky-400/70"
-                  aria-label="Close"
+                  aria-label={t("common.close")}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -271,9 +264,7 @@ export default function Hero() {
 
                 <div className="mt-5 flex items-center gap-2 text-emerald-400">
                   <CheckCircle className="h-5 w-5" />
-                  <span className="text-sm">
-                    Verified feature by NAYA Technological Indonesia
-                  </span>
+                  <span className="text-sm">{t("hero.verified")}</span>
                 </div>
               </div>
 
@@ -283,7 +274,7 @@ export default function Hero() {
                   onClick={() => setOpenKey(null)}
                   className="inline-flex items-center gap-2 rounded-xl bg-sky-500 text-white px-4 py-2 text-sm hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
-                  Tutup
+                  {t("common.close")}
                 </button>
               </div>
 

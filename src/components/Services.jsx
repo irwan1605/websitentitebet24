@@ -2,12 +2,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { CircuitBoard, PlugZap, LifeBuoy } from "lucide-react";
-
-const CARDS = [
-  { t: "Konsultasi & Arsitektur", d: "Audit kebutuhan, perancangan pipeline, dan PoC cepat.", icon: CircuitBoard },
-  { t: "Integrasi & SDK",        d: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda.", icon: PlugZap },
-  { t: "Operasional & Support",  d: "Monitoring, pelatihan, dan SLA sesuai kebutuhan.", icon: LifeBuoy },
-];
+import { useLanguage } from "../context/LanguageContext.jsx";
 
 const PALETTES = [
   { from: "from-sky-500",    to: "to-cyan-400",    glow: "rgba(56,189,248,0.35)",  ring: "shadow-[0_0_50px_-15px_rgba(56,189,248,0.55)]" },
@@ -16,12 +11,39 @@ const PALETTES = [
 ];
 
 export default function Services() {
+  const { t } = useLanguage();
+
+  // Ambil konten kartu dari kamus i18n
+  const CARDS = [
+    {
+      key: "consult",
+      t: t("services.cards.consult.title"),
+      d: t("services.cards.consult.desc"),
+      icon: CircuitBoard,
+    },
+    {
+      key: "sdk",
+      t: t("services.cards.sdk.title"),
+      d: t("services.cards.sdk.desc"),
+      icon: PlugZap,
+    },
+    {
+      key: "support",
+      t: t("services.cards.support.title"),
+      d: t("services.cards.support.desc"),
+      icon: LifeBuoy,
+    },
+  ].filter(card => card.t && card.d); // jika ada kunci yg belum di-translate, otomatis diskip
+
   return (
     <section id="layanan" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
-     <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">LAYANAN KAMI</div>
+      <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
+        {t("services.title")}
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-3">
         {CARDS.map((card, i) => (
-          <ServiceCard key={card.t} card={card} index={i} />
+          <ServiceCard key={card.key} card={card} index={i} />
         ))}
       </div>
     </section>
@@ -66,7 +88,6 @@ function ServiceCard({ card, index }) {
         backgroundBlendMode: "screen",
       }}
     >
-        
       {/* Soft outer glow */}
       <div
         className={[

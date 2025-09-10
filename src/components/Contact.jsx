@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext.jsx";
 import ContactForm from "./ContactForm";
 
 export default function Contact({
@@ -10,11 +11,12 @@ export default function Contact({
   mapUrl = "https://maps.google.com/?q=JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapEmbedUrl, // opsional: jika tak disediakan, dibuat otomatis dari address
   email = "contact@nayatechnologi.id",
-  phone = "+622-1388-25307",
+  phone = "+62 21 38825307",
 
   // 🔧 Posisi marker dalam persen relatif ke kartu peta (default kira2 pusat)
   marker = { xPercent: 52, yPercent: 48 },
 }) {
+  const { t } = useLanguage();
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, scale: 1 });
 
   const embedSrc = useMemo(() => {
@@ -54,31 +56,33 @@ export default function Contact({
   return (
     <section
       id="kontak"
-      aria-label="Kontak Perusahaan"
+      aria-label={t("contact.ariaSection", "Kontak Perusahaan")}
       className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
       <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
-        KONTAK KAMI
+        {t("contact.title", "KONTAK KAMI")}
       </div>
 
       {/* GRID: kiri kartu info, kanan peta */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {/* --- Kartu info perusahaan (kiri) --- */}
         <div className="rounded-3xl border border-white/10 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md p-6 md:p-8 text-slate-800 dark:text-slate-100 shadow-lg">
-          <h2 className="text-2xl md:text-3xl font-extrabold">Hubungi Kami</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold">
+            {t("contact.heading", "Hubungi Kami")}
+          </h2>
           <p className="mt-2 text-slate-600 dark:text-slate-300">{companyName}</p>
 
           <div className="mt-6 space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 text-sky-500 shrink-0" />
               <div>
-                <div className="font-medium">Alamat</div>
+                <div className="font-medium">{t("contact.addressLabel", "Alamat")}</div>
                 <a
                   href={mapUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-                  title="Buka lokasi di Google Maps"
+                  title={t("contact.openMapTitle", "Buka lokasi di Google Maps")}
                 >
                   {address}
                   <ExternalLink className="h-4 w-4 opacity-80" />
@@ -102,15 +106,13 @@ export default function Contact({
             <div className="flex items-start gap-3">
               <Phone className="mt-0.5 h-5 w-5 text-sky-500 shrink-0" />
               <div>
-                <div className="font-medium">Telepon</div>
+                <div className="font-medium">{t("contact.phoneLabel", "Telepon")}</div>
                 <a
                   href={`tel:${phone.replace(/\s+/g, "")}`}
                   className="text-slate-700 dark:text-slate-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
                 >
                   {phone}
                 </a>
-                <div className="text-xs text-slate-500 dark:text-slate-400">
-                </div>
               </div>
             </div>
           </div>
@@ -121,10 +123,10 @@ export default function Contact({
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 text-white px-5 py-3 text-sm hover:bg-sky-400 transition"
-              aria-label="Buka Gmail"
-              title="Buka Gmail"
+              aria-label={t("contact.openGmailAria", "Buka Gmail")}
+              title={t("contact.openGmailTitle", "Buka Gmail")}
             >
-              Kirim Email
+              {t("contact.sendEmailBtn", "Kirim Email")}
             </a>
           </div>
         </div>
@@ -141,8 +143,8 @@ export default function Contact({
           onKeyDown={onKeyOpenMap}
           role="button"
           tabIndex={0}
-          aria-label={`Buka lokasi ${companyName} di Google Maps`}
-          title="Klik untuk membuka Google Maps"
+          aria-label={`${t("contact.openMapAriaPrefix", "Buka lokasi")} ${companyName} ${t("contact.onGoogleMaps", "di Google Maps")}`}
+          title={t("contact.clickToOpenMap", "Klik untuk membuka Google Maps")}
           style={{
             transform: `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${tilt.scale})`,
             transition: "transform 120ms ease",
@@ -156,7 +158,7 @@ export default function Contact({
           <div className="relative aspect-[16/11] w-full">
             <iframe
               src={embedSrc}
-              title="Google Maps Preview"
+              title={t("contact.mapPreviewTitle", "Google Maps Preview")}
               className="absolute inset-0 h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -199,7 +201,7 @@ export default function Contact({
           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
             <div className="flex items-center justify-between gap-3">
               <div className="text-white">
-                <div className="text-xs opacity-80">Lokasi</div>
+                <div className="text-xs opacity-80">{t("contact.locationLabel", "Lokasi")}</div>
                 <div className="font-semibold leading-tight">{address}</div>
               </div>
               <span
@@ -210,7 +212,7 @@ export default function Contact({
                   transition
                 "
               >
-                Lihat di Maps
+                {t("contact.viewInMaps", "Lihat di Maps")}
                 <ExternalLink className="h-4 w-4" />
               </span>
             </div>

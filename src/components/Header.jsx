@@ -1,27 +1,16 @@
+// src/components/Header.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../assets/logo.png"; // ganti path logo sesuai project
+import logo from "../assets/logo.png";
 
-// Definisi menu dalam dua bahasa
-const NAV = {
-  id: [
-    { id: "beranda", label: "Beranda" },
-    { id: "tentang", label: "Tentang" },
-    { id: "fitur", label: "Fitur" },
-    { id: "layanan", label: "Layanan" },
-    { id: "kontak", label: "Kontak" },
-  ],
-  en: [
-    { id: "beranda", label: "Home" },
-    { id: "tentang", label: "About" },
-    { id: "fitur", label: "Features" },
-    { id: "layanan", label: "Services" },
-    { id: "kontak", label: "Contact" },
-  ],
-};
+// i18n + constants builder
+import { useLanguage } from "../context/LanguageContext.jsx";
+import { getNav } from "../lib/constants.js";
 
 export default function Header() {
-  const [lang, setLang] = useState("id"); // default bahasa Indonesia
+  const { lang, setLang, t } = useLanguage();   // >>> bahasa global
+  const NAV = getNav(t);                         // >>> label nav dari kamus
+
   const [open, setOpen] = useState(false);
 
   const toggleMenu = useCallback(() => setOpen((v) => !v), []);
@@ -56,13 +45,13 @@ export default function Header() {
             className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain border-2 border-sky-400 shadow-md rounded-lg"
           />
           <h1 className="font-brand uppercase tracking-wider md:text-1xl font-extrabold text-blue-400 animate-glow animate-shimmer whitespace-nowrap">
-            NAYA TECHNOLOGICAL INDONESIA
+            {t("brand")}
           </h1>
         </a>
 
         {/* Navigation (Desktop) */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-sm">
-          {NAV[lang].map((n) => (
+          {NAV.map((n) => (
             <a
               key={n.id}
               href={`#${n.id}`}
@@ -81,7 +70,7 @@ export default function Header() {
           {/* Divider */}
           <div className="h-5 w-px bg-white/40" />
 
-          {/* Language switch */}
+          {/* Language switch (pakai context) */}
           <button
             onClick={() => setLang("id")}
             className={`font-sans tracking-wide transition-colors duration-300 ${
@@ -149,7 +138,7 @@ export default function Header() {
               className="w-10 h-10 object-contain rounded-md border border-sky-400/80"
             />
             <span className="font-brand text-sky-400 text-sm tracking-wider">
-              NAYA TECHNOLOGICAL INDONESIA
+              {t("brand")}
             </span>
           </div>
           <button
@@ -162,7 +151,7 @@ export default function Header() {
         </div>
 
         <nav className="px-4 py-4 space-y-2">
-          {NAV[lang].map((n) => (
+          {NAV.map((n) => (
             <a
               key={n.id}
               href={`#${n.id}`}

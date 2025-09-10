@@ -1,6 +1,15 @@
+// src/components/FeatureGrid.jsx
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { FEATURES } from "../lib/constants";
+import { useLanguage } from "../context/LanguageContext.jsx";
+import {
+  Camera,
+  MonitorSmartphone,
+  LineChart,
+  ShieldCheck,
+  BadgeCheck,
+  Cpu,
+} from "lucide-react";
 
 const PALETTES = [
   { from: "from-sky-500",    to: "to-cyan-400",    glow: "rgba(56,189,248,0.35)",  ring: "shadow-[0_0_50px_-15px_rgba(56,189,248,0.6)]" },
@@ -12,14 +21,41 @@ const PALETTES = [
 ];
 
 export default function FeatureGrid() {
+  const { t } = useLanguage();
+
+  // Pemetaan ikon per kunci fitur
+  const iconMap = {
+    camera: Camera,
+    monitorsmartphone: MonitorSmartphone,
+    linechart: LineChart,
+    security: ShieldCheck,
+    accuracy: BadgeCheck,
+    speed: Cpu,
+  };
+
+  // Urutan tampil (ID lengkap 6, EN hanya yg tersedia di kamus EN)
+  const order = ["camera", "monitorsmartphone", "linechart", "security", "accuracy", "speed"];
+
+  // Bangun daftar fitur dari kamus; skip kalau title/desc tidak tersedia
+  const FEATURES = order
+    .map((key) => {
+      const title = t(`features.items.${key}.title`);
+      const desc = t(`features.items.${key}.desc`);
+      if (!title || !desc) return null; // kunci tidak ada di bahasa aktif → lewati
+      const Icon = iconMap[key] ?? BadgeCheck;
+      return { key, icon: Icon, title, desc };
+    })
+    .filter(Boolean);
+
   return (
     <section id="fitur" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16">
-        <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
-        FITUR KAMI
+      <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
+        {t("features.title")}
       </div>
+
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {FEATURES.map((f, i) => (
-          <FeatureCard key={f.title} feature={f} index={i} />
+          <FeatureCard key={`${f.key}-${i}`} feature={f} index={i} />
         ))}
       </div>
     </section>
@@ -83,7 +119,7 @@ function FeatureCard({ feature: f, index }) {
           ].join(" ")}
         >
           <div className="grid h-full w-full place-items-center rounded-2xl bg-white">
-            {/* Biarkan ikon gelap agar kontras di dasar putih */}
+            {/* Ikon gelap agar kontras di dasar putih */}
             <f.icon className="h-6 w-6 text-slate-700 transition-all duration-300 group-hover:scale-110 group-hover:text-slate-900" />
           </div>
           <div
