@@ -41,12 +41,12 @@ export default function About() {
       </div>
 
       {/* Card deskripsi */}
-      <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 to-sky-50 p-6 lg:p-10">
+      <div className="text-white rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-20 to-sky-50 p-6 lg:p-10">
         <h2 className="text-xl md:text-2xl text-center font-bold">
           {t("about.companyTitle")}
         </h2>
 
-        <p className="mx-auto p-4 mt-2 text-slate-800 leading-relaxed max-w-3xl">
+        <p className="mx-auto p-4 mt-4 text-slate-800 leading-relaxed md:text-xl max-w-4xl text-white">
           {t("about.body")}
         </p>
 

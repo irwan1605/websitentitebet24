@@ -67,11 +67,12 @@ export default function ContactForm({ waNumber = "081460870870" }) {
       onSubmit={handleSubmit}
       className="
         rounded-3xl border border-white/10
-        bg-white/70 dark:bg-slate-900/60
+        bg-white/10 dark:bg-slate-900/60
         backdrop-blur-md shadow-lg
         p-6 md:p-8
         text-slate-800 dark:text-slate-100
         space-y-4
+        text-white
       "
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

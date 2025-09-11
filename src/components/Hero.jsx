@@ -101,7 +101,7 @@ export default function Hero() {
         overlayOpacity={0.55}
       />
 
-      <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="md:text-xl relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Kiri: headline */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -145,7 +145,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05, duration: 0.4 }}
-          className="rounded-3xl border border-slate-200/30 bg-white/80 shadow-sm overflow-hidden backdrop-blur-sm"
+          className="rounded-3xl border border-slate-200/30 bg-blue/50 shadow-sm overflow-hidden backdrop-blur-sm"
         >
           <div className="aspect-[16] grid md:grid-cols-2">
             {/* Panel kiri */}
@@ -160,7 +160,7 @@ export default function Hero() {
                     key={it.key}
                     type="button"
                     onClick={() => setOpenKey(it.key)}
-                    className="group relative h-20 md:h-24 w-full rounded-xl border border-slate-500/40 bg-white/5 overflow-hidden transition focus:outline-none focus:ring-2 focus:ring-sky-400/70"
+                    className="group relative h-20 md:h-24 w-full rounded-xl border border-slate-500/40 bg-blue/5 overflow-hidden transition focus:outline-none focus:ring-2 focus:ring-sky-400/70"
                   >
                     {/* Gambar */}
                     <img
@@ -192,7 +192,7 @@ export default function Hero() {
             </div>
 
             {/* Panel kanan: gambar/brand */}
-            <div className="relative bg-slate-100/70 flex items-center justify-center py-10">
+            <div className="relative bg-slate-100/30 flex items-center justify-center py-10">
               <img
                 src="/bg/logotansparannti.png"
                 alt="Logo NTI"
