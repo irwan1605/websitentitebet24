@@ -86,7 +86,7 @@ export default function ContactForm({ waNumber = "081460870870" }) {
             value={form.name}
             onChange={onChange}
             placeholder={t("contactForm.namePh", "Nama lengkap")}
-            className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/70 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
+            className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
           />
         </label>
 
@@ -100,7 +100,7 @@ export default function ContactForm({ waNumber = "081460870870" }) {
             value={form.email}
             onChange={onChange}
             placeholder={t("contactForm.emailPh", "email@domain.com")}
-            className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/70 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
+            className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
           />
         </label>
       </div>
@@ -115,7 +115,7 @@ export default function ContactForm({ waNumber = "081460870870" }) {
           value={form.subject}
           onChange={onChange}
           placeholder={t("contactForm.subjectPh", "Topik pesan")}
-          className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/70 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
+          className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
         />
       </label>
 
@@ -133,7 +133,7 @@ export default function ContactForm({ waNumber = "081460870870" }) {
           )}
           rows={5}
           required
-          className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/70 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
+          className="mt-1 w-full rounded-xl border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-sky-400"
         />
       </label>
 
