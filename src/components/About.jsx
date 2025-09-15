@@ -5,10 +5,19 @@ import { useLanguage } from "../context/LanguageContext.jsx";
 
 const SLIDES = [
   // Letak file: public/slide/<nama file>
-  "slide1.jpg",
-  "slide2.jpg",
-  "slide3.jpg",
-  "slide4.jpg",
+  "logo_depan_ruangan.jpg",
+  "ruang_depan3.jpg",
+  "ruang_depan1.jpg",
+  "ruang_kerja_admin2.jpg",
+  "ruang_rapat2.jpg",
+  "ruang_rapat4.jpg",
+  "ruang_rapat5.jpg",
+  "ruang_rapat8.jpg",
+  "ruang_rapat10.jpg",
+  "ruang_rapat12.jpg",
+  "ruang_rapat14.jpg",
+  "ruang_tamu2.jpg",
+  "ruang_tamu3.jpg",
 ];
 
 export default function About() {
