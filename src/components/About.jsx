@@ -36,7 +36,7 @@ export default function About() {
 
   useEffect(() => {
     if (paused || SLIDES.length <= 1) return;
-    timerRef.current = setInterval(next, 2000); // 2 detik
+    timerRef.current = setInterval(next, 5000); // 2 detik
     return () => clearInterval(timerRef.current);
   }, [paused, next]);
 
