@@ -61,26 +61,80 @@ export const dictionaries = {
         camera: {
           title: "Perangkat (device/sensor/board) ",
           desc: "Pengadaan perangkat lunak (firmware, aplikasi, cloud/API).",
+          modalTitle: "Perangkat & Modul Siap Produksi",
+          detail:
+            "Rangkaian perangkat keras dan modul siap produksi dengan dukungan konektivitas standar industri, sertifikasi, serta pembaruan OTA.",
+          bullets: {
+            1: "Sensor kamera, modul fingerprint/iris, board MCU/SoC siap produksi.",
+            2: "Konektivitas USB/Serial/Ethernet/Wi-Fi; protokol RTSP/ONVIF/MQTT.",
+            3: "Sertifikasi CE/FCC/RoHS; panduan instalasi & keselamatan.",
+            4: "Pembaruan firmware OTA & manajemen perangkat terpusat.",
+          },
         },
         monitorsmartphone: {
           title: "mengoperasikan R&D dan Manufaktur ",
           desc: "SDK ringan untuk desktop & mobile.",
+          modalTitle: "Operasi R&D & Manufaktur",
+          detail:
+            "Alur R&D cepat dari PoC ke produksi, dokumentasi teknis lengkap, serta praktik manufaktur terbaik untuk kualitas yang konsisten.",
+          bullets: {
+            1: "Riset & prototyping cepat (PoC → pilot → produksi).",
+            2: "Desain manufaktur (DFM/DFA), SOP QC, dan jig pengujian.",
+            3: "Dokumentasi teknis: skematik, BOM, gerber, dan datasheet.",
+            4: "Pelacakan versi & jejak unit (serial number / lot).",
+          },
         },
         linechart: {
           title: "Distribusi dan Pemasaran",
           desc: "Pencarian individu dari arsip media.",
-        },
-        accuracy: {
-          title: "Akurasi Tinggi",
-          desc: "Pengenalan biometrik presisi dengan false positive/negative yang rendah.",
+          modalTitle: "Distribusi & Pemasaran",
+          detail:
+            "Ekspansi pasar melalui jaringan mitra, aset pemasaran yang kuat, serta dukungan layanan purna jual nasional.",
+          bullets: {
+            1: "Jaringan distribusi nasional & mitra global.",
+            2: "Aset pemasaran: brand kit, brosur, video, dan demo app.",
+            3: "Skema garansi, proses RMA, dan pusat layanan.",
+            4: "Laporan penjualan & analitik kanal.",
+          },
         },
         security: {
-          title: "Keamanan Berlapis",
-          desc: "Enkripsi end-to-end dan kontrol akses berbasis peran.",
+          title: "Keamanan & Privasi",
+          desc: "Enkripsi & kontrol akses berjenjang.",
+          modalTitle: "Keamanan & Privasi",
+          detail:
+            "Perlindungan data komprehensif dengan enkripsi menyeluruh, kontrol akses ketat, serta audit trail yang transparan.",
+          bullets: {
+            1: "Enkripsi at-rest & in-transit (AES-256/TLS).",
+            2: "RBAC, SSO/OIDC, dan rotasi kredensial/secret.",
+            3: "Audit log, tamper detection, dan alerting.",
+            4: "Kepatuhan GDPR/PDPA; opsi on-prem.",
+          },
+        },
+        accuracy: {
+          title: "Akurasi Terverifikasi",
+          desc: "Metrik FMR/TPR transparan.",
+          modalTitle: "Akurasi Terverifikasi",
+          detail:
+            "Akurasi tinggi yang divalidasi dengan metodologi terbuka, dataset beragam, dan laporan benchmark berkala.",
+          bullets: {
+            1: "Uji FMR/TPR/ROC transparan di dataset beragam.",
+            2: "Kalibrasi perangkat & normalisasi pencahayaan.",
+            3: "Anti-spoof/liveness untuk cegah penipuan.",
+            4: "Benchmark berkala & laporan akurasi.",
+          },
         },
         speed: {
-          title: "Kecepatan Proses",
-          desc: "Verifikasi real-time untuk skenario high-throughput.",
+          title: "Optimasi Edge",
+          desc: "Cepat & hemat daya di edge devices.",
+          modalTitle: "Optimasi Kinerja di Edge",
+          detail:
+            "Arsitektur yang dioptimalkan untuk perangkat edge: latensi rendah, hemat daya, namun tetap presisi.",
+          bullets: {
+            1: "Optimasi SIMD/NEON, offload GPU/NPU bila tersedia.",
+            2: "Kuantisasi INT8, pruning, dan caching fitur.",
+            3: "Latensi <50 ms untuk verifikasi real-time.",
+            4: "Profiling ujung-ke-ujung & fallback mulus.",
+          },
         },
       },
     },
@@ -206,33 +260,87 @@ export const dictionaries = {
       gotoSlide: "Go to slide",
     },
 
-    // ---- FEATURES ----
-    features: {
+     // ---- FEATURES ----
+     features: {
       title: "OUR FEATURES",
       items: {
         camera: {
-          title: "Device (device/sensor/board)",
-          desc: "Software procurement (firmware, app, cloud/API).",
+          title: "Devices (device/sensor/board)",
+          desc: "Software procurement (firmware, apps, cloud/API).",
+          modalTitle: "Devices & Modules Ready for Production",
+          detail:
+            "Comprehensive hardware modules with industry-standard connectivity, certifications, and OTA update support.",
+          bullets: {
+            1: "Camera sensors, fingerprint/iris modules, MCU/SoC boards ready for production.",
+            2: "USB/Serial/Ethernet/Wi-Fi connectivity; RTSP/ONVIF/MQTT protocols.",
+            3: "CE/FCC/RoHS compliance; installation & safety guides.",
+            4: "OTA firmware updates & centralized device management.",
+          },
         },
         monitorsmartphone: {
           title: "Operating R&D and Manufacturing",
           desc: "Lightweight SDK for desktop & mobile.",
+          modalTitle: "R&D Operations & Manufacturing",
+          detail:
+            "Fast R&D cycle from PoC to production, complete technical docs, and best practices for consistent quality.",
+          bullets: {
+            1: "Rapid R&D (PoC → pilot → production).",
+            2: "Manufacturing design (DFM/DFA), QC SOPs, and test jigs.",
+            3: "Technical docs: schematics, BOM, gerbers, and datasheets.",
+            4: "Versioning & unit traceability (serial number / lot).",
+          },
         },
         linechart: {
           title: "Distribution and Marketing",
           desc: "Individual search from media archives.",
-        },
-        accuracy: {
-          title: "High Accuracy",
-          desc: "Precise biometric recognition with low false positives/negatives.",
+          modalTitle: "Distribution & Marketing",
+          detail:
+            "Market expansion via partner networks, strong marketing assets, and nationwide after-sales support.",
+          bullets: {
+            1: "Nationwide distribution and global partners.",
+            2: "Marketing assets: brand kit, brochures, videos, and demo apps.",
+            3: "Warranty, RMA workflows, and service centers.",
+            4: "Sales reporting and channel analytics.",
+          },
         },
         security: {
-          title: "Layered Security",
-          desc: "End-to-end encryption and role-based access control.",
+          title: "Security & Privacy",
+          desc: "Encryption & layered access control.",
+          modalTitle: "Security & Privacy",
+          detail:
+            "Comprehensive data protection with end-to-end encryption, strict access control, and transparent audit trails.",
+          bullets: {
+            1: "Encryption at rest & in transit (AES-256/TLS).",
+            2: "RBAC, SSO/OIDC, and secret rotation.",
+            3: "Audit logs, tamper detection, and alerting.",
+            4: "GDPR/PDPA compliance; on-prem option.",
+          },
+        },
+        accuracy: {
+          title: "Verified Accuracy",
+          desc: "Transparent FMR/TPR metrics.",
+          modalTitle: "Verified Accuracy",
+          detail:
+            "High accuracy validated with open methodology, diverse datasets, and regular benchmark reports.",
+          bullets: {
+            1: "Transparent FMR/TPR/ROC tests on diverse datasets.",
+            2: "Device calibration & illumination normalization.",
+            3: "Anti-spoof/liveness to prevent fraud.",
+            4: "Regular benchmarks & accuracy reports.",
+          },
         },
         speed: {
-          title: "Processing Speed",
-          desc: "Real-time verification for high-throughput scenarios.",
+          title: "Edge Optimization",
+          desc: "Fast & power-efficient on edge devices.",
+          modalTitle: "Edge Performance Optimization",
+          detail:
+            "Architecture optimized for edge devices: low latency and power-efficient while maintaining precision.",
+          bullets: {
+            1: "SIMD/NEON optimizations and GPU/NPU offload when available.",
+            2: "INT8 quantization, pruning, and feature caching.",
+            3: "<50 ms latency for real-time verification.",
+            4: "End-to-end profiling and graceful fallbacks.",
+          },
         },
       },
     },

@@ -28,8 +28,8 @@ export default function Contact({
   const handleMouseMove = useCallback((e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;  // 0..1
-    const y = (e.clientY - rect.top) / rect.height;  // 0..1
+    const x = (e.clientX - rect.left) / rect.width; // 0..1
+    const y = (e.clientY - rect.top) / rect.height; // 0..1
     const rx = (0.5 - y) * 10;
     const ry = (x - 0.5) * 10;
     setTilt({ rx, ry, scale: 1.02 });
@@ -70,23 +70,35 @@ export default function Contact({
           <h2 className="text-2xl md:text-3xl font-extrabold">
             {t("contact.heading", "Hubungi Kami")}
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">{companyName}</p>
+          <p className="mt-2 text-slate-600 dark:text-slate-300">
+            {companyName}
+          </p>
 
           <div className="mt-6 space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 text-sky-500 shrink-0" />
               <div>
-                <div className="font-medium">{t("contact.addressLabel", "Alamat")}</div>
+                <div className="font-medium">
+                  {t("contact.addressLabel", "Alamat")}
+                </div>
+
                 <a
                   href={mapUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 text-slate-700 dark:text-slate-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-                  title={t("contact.openMapTitle", "Buka lokasi di Google Maps")}
+                  title={t(
+                    "contact.openMapTitle",
+                    "Buka lokasi di Google Maps"
+                  )}
                 >
                   {address}
                   <ExternalLink className="h-4 w-4 opacity-80" />
                 </a>
+                <p>
+                  RT.2/RW.2, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan,
+                  Daerah Khusus Ibukota Jakarta 12810
+                </p>
               </div>
             </div>
 
@@ -106,7 +118,9 @@ export default function Contact({
             <div className="flex items-start gap-3">
               <Phone className="mt-0.5 h-5 w-5 text-sky-500 shrink-0" />
               <div>
-                <div className="font-medium">{t("contact.phoneLabel", "Telepon")}</div>
+                <div className="font-medium">
+                  {t("contact.phoneLabel", "Telepon")}
+                </div>
                 <a
                   href={`tel:${phone.replace(/\s+/g, "")}`}
                   className="text-slate-700 dark:text-slate-200 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
@@ -143,7 +157,10 @@ export default function Contact({
           onKeyDown={onKeyOpenMap}
           role="button"
           tabIndex={0}
-          aria-label={`${t("contact.openMapAriaPrefix", "Buka lokasi")} ${companyName} ${t("contact.onGoogleMaps", "di Google Maps")}`}
+          aria-label={`${t(
+            "contact.openMapAriaPrefix",
+            "Buka lokasi"
+          )} ${companyName} ${t("contact.onGoogleMaps", "di Google Maps")}`}
           title={t("contact.clickToOpenMap", "Klik untuk membuka Google Maps")}
           style={{
             transform: `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${tilt.scale})`,
@@ -201,7 +218,9 @@ export default function Contact({
           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
             <div className="flex items-center justify-between gap-3">
               <div className="text-white">
-                <div className="text-xs opacity-80">{t("contact.locationLabel", "Lokasi")}</div>
+                <div className="text-xs opacity-80">
+                  {t("contact.locationLabel", "Lokasi")}
+                </div>
                 <div className="font-semibold leading-tight">{address}</div>
               </div>
               <span
