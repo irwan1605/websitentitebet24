@@ -54,7 +54,6 @@ export default function Home() {
       <FeatureGrid />
 
       {/* ⬇️ Saat #devinternal, gantikan About dengan AboutDevInternal */}
-      {isDevInternal ? <AboutDevInternal /> : <About />}
 
       <Services />
       <Contact />
