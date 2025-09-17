@@ -56,13 +56,13 @@ export default function AboutDevInternal() {
       className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16"
     >
       <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
-        {t("aboutdev.title")}
+        {t("about.title")}
       </div>
 
       {/* Card deskripsi */}
       <div className="text-white rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-20 to-sky-50 p-6 lg:p-10">
         <h2 className="text-xl md:text-2xl text-center font-bold">
-          {t("aboutdev.companyTitle")}
+          {t("about.companyTitle")}
         </h2>
 
         <p className="mx-auto p-4 mt-4 text-slate-800 leading-relaxed md:text-xl max-w-4xl text-white">
@@ -73,7 +73,7 @@ export default function AboutDevInternal() {
           className="group relative mb-6 p-4 overflow-hidden rounded-3xl border border-white/10 bg-black/10 backdrop-blur"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          aria-label={t("aboutdev.galleryAria")}
+          aria-label={t("about.galleryAria")}
         >
           {/* Track images */}
           <div className="relative h-[220px] sm:h-[300px] lg:h-[380px]">
@@ -81,7 +81,7 @@ export default function AboutDevInternal() {
               <img
                 key={file}
                 src={`/slide/${file}`}
-                alt={`${t("aboutdev.slide")} ${i + 1}`}
+                alt={`${t("about.slide")} ${i + 1}`}
                 className={[
                   "absolute inset-0 h-full w-full object-cover",
                   "transition-opacity duration-700 ease-out",
@@ -104,7 +104,7 @@ export default function AboutDevInternal() {
             onClick={prev}
             className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 text-slate-800 shadow hover:bg-white transition opacity-0 group-hover:opacity-100"
             aria-label={t("about.prev")}
-            title={t("aboutdev.prev")}
+            title={t("about.prev")}
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -112,8 +112,8 @@ export default function AboutDevInternal() {
             type="button"
             onClick={next}
             className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 text-slate-800 shadow hover:bg-white transition opacity-0 group-hover:opacity-100"
-            aria-label={t("aboutdev.next")}
-            title={t("aboutdev.next")}
+            aria-label={t("about.next")}
+            title={t("about.next")}
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -128,7 +128,7 @@ export default function AboutDevInternal() {
                   "h-2.5 w-2.5 rounded-full transition",
                   i === idx ? "bg-white" : "bg-white/50 hover:bg-white/80",
                 ].join(" ")}
-                aria-label={`${t("aboutdev.gotoSlide")} ${i + 1}`}
+                aria-label={`${t("about.gotoSlide")} ${i + 1}`}
               />
             ))}
           </div>
