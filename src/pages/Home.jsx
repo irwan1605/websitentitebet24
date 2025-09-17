@@ -50,6 +50,7 @@ export default function Home() {
 
       <Header />
       <Hero />
+      {isDevInternal ? <AboutDevInternal /> : <About />}
       <FeatureGrid />
 
       {/* ⬇️ Saat #devinternal, gantikan About dengan AboutDevInternal */}
