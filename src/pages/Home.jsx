@@ -23,7 +23,7 @@ export default function Home() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  const isDevInternal = hash === "#devinternal";
+  const isDevInternal = hash === "#dev";
 
   // Smooth scroll ke elemen yg sesuai hash (termasuk #devinternal)
   useEffect(() => {

@@ -16,7 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* Rute tersembunyi: semua halaman sama, About diganti versi internal */}
-          <Route path="/devinternal" element={<HomeDevInternal />} />
+          <Route path="/dev" element={<HomeDevInternal />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

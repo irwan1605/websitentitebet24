@@ -52,7 +52,7 @@ export default function AboutDevInternal() {
 
   return (
     <section
-      id="devinternal"
+      id="dev"
       className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16"
     >
       <div className="md:text-2xl text-sm uppercase tracking-widest text-slate-200 font-semibold text-center p-4">
