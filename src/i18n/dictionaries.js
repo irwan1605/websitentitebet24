@@ -3,7 +3,17 @@
 // Gunakan via: const { t } = useLanguage(); t("path.to.key")
 
 export const dictionaries = {
+  
   id: {
+
+    search: {
+      placeholder: "Cari apa saja di situs ini…",
+      empty: "Ketik untuk mulai mencari…",
+      noResults: "Tidak ada hasil yang cocok.",
+      none: "Tidak ada hasil. Coba kata kunci lain.", // ⬅️ ditambahkan
+      ctaSearch: "Cari",
+    },
+
     brand: "NAYA TECHNOLOGICAL INDONESIA",
 
     nav: {
@@ -143,18 +153,19 @@ export const dictionaries = {
     services: {
       title: "LAYANAN KAMI",
       cards: {
-        consult: {
-          title: "Konsultasi & Arsitektur",
-          desc: "Audit kebutuhan, perancangan pipeline, dan PoC cepat.",
-        },
-        sdk: {
-          title: "Integrasi & SDK",
-          desc: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda.",
-        },
-        support: {
-          title: "Operasional & Support",
-          desc: "Monitoring, pelatihan, dan SLA sesuai kebutuhan.",
-        },
+        consult: { title: "Konsultasi & Arsitektur", desc: "Audit kebutuhan, perancangan pipeline, dan PoC cepat." },
+        sdk:     { title: "Integrasi & SDK",        desc: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda." },
+        support: { title: "Operasional & Support",  desc: "Monitoring, pelatihan, dan SLA sesuai kebutuhan." },
+      },
+        slider: {
+          title: "Konsultasi • Integrasi • Operasional",
+          prev: "Sebelumnya",
+          next: "Berikutnya",
+          captions: {
+            consult: "Konsultasi & Arsitektur — Audit kebutuhan, rancang arsitektur, dan PoC cepat bersama tim ahli.",
+            sdk: "Integrasi & SDK — Integrasi kamera, CCTV/VMS, dan SDK lintas platform yang ringan.",
+            support: "Operasional & Support — Monitoring, pelatihan, dan SLA fleksibel sesuai kebutuhan.",
+          }
       },
     },
 
@@ -210,6 +221,15 @@ export const dictionaries = {
   // =====================================================================
 
   en: {
+
+    search: {
+      placeholder: "Search anything on this site…",
+      empty: "Type to start searching…",
+      noResults: "No matching results.",
+      none: "No results. Try another keyword.", // ⬅️ ditambahkan
+      ctaSearch: "Search",
+    },
+
     brand: "NAYA TECHNOLOGICAL INDONESIA",
 
     nav: {
@@ -349,19 +369,20 @@ export const dictionaries = {
     services: {
       title: "OUR SERVICES",
       cards: {
-        consult: {
-          title: "Consulting & Architecture",
-          desc: "Needs assessment, pipeline design, and rapid PoC.",
-        },
-        sdk: {
-          title: "Integration & SDK",
-          desc: "Integrate cameras, CCTV, VMS, and SDKs for your applications.",
-        },
-        support: {
-          title: "Operations & Support",
-          desc: "Monitoring, training, and SLAs tailored to your needs.",
-        },
+        consult: { title: "Consulting & Architecture", desc: "Needs assessment, pipeline design, and rapid PoC." },
+        sdk:     { title: "Integration & SDK",         desc: "Integrate cameras, CCTV/VMS, and cross-platform SDKs." },
+        support: { title: "Operations & Support",      desc: "Monitoring, training, and flexible SLAs." },
       },
+      slider: {
+        title: "Consulting • Integration • Operations",
+        prev: "Previous",
+        next: "Next",
+        captions: {
+          consult: "Consulting & Architecture — Needs assessment, solution architecture, and rapid PoC.",
+          sdk: "Integration & SDK — Camera, CCTV/VMS integration, and lightweight cross-platform SDKs.",
+          support: "Operations & Support — Monitoring, training, and flexible SLAs to fit your needs.",
+        }
+      }
     },
 
     contact: {

@@ -1,14 +1,159 @@
 // src/components/Hero.jsx
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Globe2, CheckCircle, X } from "lucide-react";
+import { ChevronRight, Globe2, CheckCircle, X, Search } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import NAYAAnimatedBiometricBackground from "./NAYAAnimatedBiometricBackground.jsx";
 
 export default function Hero() {
   const { t } = useLanguage();
 
-  // Item teknologi untuk panel kiri & modal
+  // ==== SEARCH BAR (top-center, glow, global search) ====
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const [glowPos, setGlowPos] = useState({ x: "50%", y: "50%" });
+  const searchWrapRef = useRef(null);
+
+  const SECTION_IDS = ["beranda", "tentang", "fitur", "layanan", "kontak"];
+
+  const titleForId = (id) => {
+    switch (id) {
+      case "beranda":
+        return t("nav.home", "Beranda");
+      case "tentang":
+        return t("about.title", "TENTANG KAMI");
+      case "fitur":
+        return t("features.title", "FITUR KAMI");
+      case "layanan":
+        return t("services.title", "LAYANAN KAMI");
+      case "kontak":
+        return t("nav.contact", "Kontak");
+      default:
+        return id;
+    }
+  };
+
+  const buildIndex = useCallback(() => {
+    return SECTION_IDS.map((id) => {
+      const el = document.getElementById(id);
+      const text = (el?.innerText || "").replace(/\s+/g, " ").trim();
+      return { id, title: titleForId(id), text };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]); // ketika bahasa berubah, judul juga ikut berubah
+
+  const highlight = (text, q) => {
+    if (!q) return text;
+    try {
+      const esc = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const re = new RegExp(`(${esc.split(/\s+/).join("|")})`, "ig");
+      return text.replace(
+        re,
+        "<mark class='bg-yellow-300/70 text-slate-900 px-0.5 rounded-sm'>$1</mark>"
+      );
+    } catch {
+      return text;
+    }
+  };
+
+  const makeSnippet = (text, q) => {
+    const qLower = q.toLowerCase();
+    let pos = text.toLowerCase().indexOf(qLower);
+    if (pos < 0) {
+      // coba pakai kata pertama
+      const first = qLower.split(/\s+/)[0] || "";
+      pos = text.toLowerCase().indexOf(first);
+    }
+    if (pos < 0) pos = 0;
+    const start = Math.max(0, pos - 60);
+    const end = Math.min(text.length, pos + q.length + 60);
+    const snippet =
+      (start > 0 ? "… " : "") +
+      text.slice(start, end) +
+      (end < text.length ? " …" : "");
+    return highlight(snippet, q);
+  };
+
+  const runSearch = useCallback(
+    (q) => {
+      if (!q || q.trim().length < 2) {
+        setResults([]);
+        setActiveIdx(-1);
+        return;
+      }
+      const index = buildIndex();
+      const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+      const scored = index
+        .map((item) => {
+          const hay = item.text.toLowerCase();
+          let score = 0;
+          terms.forEach((term) => {
+            let i = hay.indexOf(term);
+            while (i !== -1) {
+              score += 1;
+              i = hay.indexOf(term, i + term.length);
+            }
+          });
+          return { ...item, score };
+        })
+        .filter((r) => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 8)
+        .map((r) => ({
+          ...r,
+          snippetHtml: makeSnippet(r.text, q),
+        }));
+      setResults(scored);
+      setActiveIdx(scored.length ? 0 : -1);
+    },
+    [buildIndex]
+  );
+
+  // debounce ringan
+  useEffect(() => {
+    const id = setTimeout(() => runSearch(query), 120);
+    return () => clearTimeout(id);
+  }, [query, runSearch]);
+
+  const onSearchKey = (e) => {
+    if (!results.length) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIdx((i) => Math.min(i + 1, results.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIdx((i) => Math.max(i - 1, 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const target = results[activeIdx] || results[0];
+      if (target) {
+        document
+          .getElementById(target.id)
+          ?.scrollIntoView({ behavior: "smooth" });
+        setResults([]);
+        setQuery("");
+      }
+    } else if (e.key === "Escape") {
+      setResults([]);
+    }
+  };
+
+  const gotoResult = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setResults([]);
+    setQuery("");
+  };
+
+  const onGlowMove = (e) => {
+    const rect = searchWrapRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setGlowPos({ x: `${x}%`, y: `${y}%` });
+  };
+
+  // ==== SCAN ITEMS & MODAL ====
   const scanItems = [
     {
       key: "fingerprint",
@@ -33,7 +178,6 @@ export default function Hero() {
   const onEsc = useCallback((e) => {
     if (e.key === "Escape") setOpenKey(null);
   }, []);
-
   useEffect(() => {
     document.addEventListener("keydown", onEsc);
     return () => document.removeEventListener("keydown", onEsc);
@@ -42,15 +186,10 @@ export default function Hero() {
   // --- A11y: Focus trap & kunci scroll saat modal terbuka
   const modalRef = useRef(null);
   const closeBtnRef = useRef(null);
-
   useEffect(() => {
     if (!current) return;
-
-    // Lock scroll body
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    // Set initial focus ke tombol close
     const to = setTimeout(() => {
       closeBtnRef.current?.focus();
     }, 0);
@@ -63,7 +202,6 @@ export default function Hero() {
       if (!focusables.length) return;
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
-
       if (e.shiftKey) {
         if (document.activeElement === first) {
           e.preventDefault();
@@ -76,7 +214,6 @@ export default function Hero() {
         }
       }
     };
-
     document.addEventListener("keydown", handleTabTrap);
 
     return () => {
@@ -89,9 +226,9 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14"
+      className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 lg:pt-36 pb-10 lg:pb-16"
     >
-      {/* Hapus komponen ini jika background sudah dipasang global di layout/Home */}
+      {/* Background biometrik */}
       <NAYAAnimatedBiometricBackground
         imageUrl="/bg/fingeriris1.png"
         primary="#38bdf8"
@@ -100,6 +237,100 @@ export default function Hero() {
         speed={1}
         overlayOpacity={0.55}
       />
+
+      {/* ======= SEARCH BAR: TOP-CENTER WITH GLOW ======= */}
+      <div
+        ref={searchWrapRef}
+        onMouseMove={onGlowMove}
+        onMouseLeave={() => setGlowPos({ x: "50%", y: "50%" })}
+        className="pointer-events-auto absolute left-1/2 -translate-x-1/2 top-6 sm:top-8 md:top-10 z-40 w-full max-w-2xl px-3"
+        style={{
+          background: `radial-gradient(200px circle at ${glowPos.x} ${glowPos.y}, rgba(56,189,248,0.18), transparent 60%)`,
+          borderRadius: "1rem",
+        }}
+      >
+       <div className="relative rounded-2xl bg-white/20 dark:bg-slate-900/70 backdrop-blur px-4 py-3 ring-1 ring-white/30 dark:ring-white/10">
+          <div className="relative rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur px-3 py-2 ring-1 ring-white/30 dark:ring-white/10">
+            <div className="flex items-center gap-2">
+              <Search className="h-5 w-5 text-slate-500 dark:text-slate-300" />
+              <input
+                value={query}
+                textColor ="black"
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={onSearchKey}
+                placeholder={t(
+                  "search.placeholder",
+                  "Cari apa saja di halaman…"
+                )}
+                aria-label={t(
+                  "search.placeholder",
+                  "Cari apa saja di halaman…"
+                )}
+                className="w-full bg-transparent outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 text-slate-800 dark:text-slate-100 text-sm md:text-base"
+              />
+              {query && (
+                <button
+                  onClick={() => {
+                    setQuery("");
+                    setResults([]);
+                  }}
+                  className="text-xs px-2 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-700"
+                >
+                  {t("common.close", "Tutup")}
+                </button>
+              )}
+            </div>
+
+            {/* results dropdown */}
+            <AnimatePresence>
+              {results.length > 0 && (
+                <motion.ul
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 right-0 mt-2 rounded-2xl border border-white/20 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-2 max-h-[50vh] overflow-auto shadow-xl"
+                >
+                  {results.map((r, idx) => (
+                    <li key={r.id}>
+                      <button
+                        onMouseEnter={() => setActiveIdx(idx)}
+                        onClick={() => gotoResult(r.id)}
+                        className={[
+                          "w-full text-left rounded-xl px-3 py-2",
+                          idx === activeIdx
+                            ? "bg-sky-500/15 ring-1 ring-sky-400/30"
+                            : "hover:bg-white/60 dark:hover:bg-white/10",
+                        ].join(" ")}
+                      >
+                        <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                          {r.title}
+                        </div>
+                        <div
+                          className="text-sm text-slate-800 dark:text-slate-100"
+                          dangerouslySetInnerHTML={{ __html: r.snippetHtml }}
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+              {query && results.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 right-0 mt-2 rounded-xl border border-white/20 bg-white/90 dark:bg-slate-900/90 backdrop-blur p-3 text-sm text-slate-600 dark:text-slate-300"
+                >
+                  {t("search.none", "Tidak ada hasil. Coba kata kunci lain.")}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+      {/* ======= END SEARCH BAR ======= */}
 
       <div className="md:text-xl relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Kiri: headline */}
@@ -140,12 +371,12 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Kanan: kartu dengan grid 2 kolom; mobile-friendly */}
+        {/* Kanan: kartu grid */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05, duration: 0.4 }}
-          className="rounded-3xl border border-slate-200/30 bg-blue/50 shadow-sm overflow-hidden backdrop-blur-sm"
+          className="rounded-3xl border border-slate-200/30 bg-white/80 shadow-sm overflow-hidden backdrop-blur-sm"
         >
           <div className="aspect-[16] grid md:grid-cols-2">
             {/* Panel kiri */}
@@ -160,23 +391,16 @@ export default function Hero() {
                     key={it.key}
                     type="button"
                     onClick={() => setOpenKey(it.key)}
-                    className="group relative h-20 md:h-24 w-full rounded-xl border border-slate-500/40 bg-blue/5 overflow-hidden transition focus:outline-none focus:ring-2 focus:ring-sky-400/70"
+                    className="group relative h-20 md:h-24 w-full rounded-xl border border-slate-500/40 bg-white/5 overflow-hidden transition focus:outline-none focus:ring-2 focus:ring-sky-400/70"
                   >
-                    {/* Gambar */}
                     <img
                       src={it.img}
                       alt={it.label}
                       className="absolute inset-0 h-full w-full object-contain p-3 opacity-90 transition-transform duration-300 group-hover:scale-105 group-hover:opacity-100"
                       onError={(e) => (e.currentTarget.style.opacity = 0.2)}
                     />
-
-                    {/* Overlay gradient + glow saat hover */}
                     <div className="pointer-events-none absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-80 group-hover:from-emerald-500/25 group-hover:via-emerald-500/10" />
-
-                    {/* Ring + shadow glow */}
                     <div className="pointer-events-none absolute inset-0 rounded-xl ring-0 transition-all group-hover:ring-2 group-hover:ring-emerald-400/60 group-hover:shadow-[0_0_36px_rgba(16,185,129,0.45)]" />
-
-                    {/* Label + ceklist di dalam kotak */}
                     <div className="absolute inset-x-2.5 md:inset-x-3 bottom-2 flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <CheckCircle className="h-5 w-5 text-emerald-400" />
@@ -191,7 +415,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Panel kanan: gambar/brand */}
+            {/* Panel kanan: brand */}
             <div className="relative bg-slate-100/30 flex items-center justify-center py-10">
               <img
                 src="/bg/logotansparannti.png"
@@ -203,7 +427,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Modal/Card detail */}
+      {/* Modal detail teknologi */}
       <AnimatePresence>
         {current && (
           <motion.div
@@ -217,7 +441,6 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* backdrop */}
             <motion.div
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
               initial={{ opacity: 0 }}
@@ -225,7 +448,6 @@ export default function Hero() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             />
-            {/* card */}
             <motion.div
               ref={modalRef}
               initial={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -278,7 +500,6 @@ export default function Hero() {
                 </button>
               </div>
 
-              {/* glow frame */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 shadow-[0_0_60px_rgba(56,189,248,0.2)]" />
             </motion.div>
           </motion.div>
