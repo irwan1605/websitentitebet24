@@ -12,7 +12,7 @@ import NAYAAnimatedBiometricBackground from "../components/NAYAAnimatedBiometric
 export default function HomeDevInternal() {
   return (
     <div className="relative min-h-screen text-slate-900">
-        <NAYAAnimatedBiometricBackground
+      <NAYAAnimatedBiometricBackground
         imageUrl="/bg/fingeriris1.png"
         primary="#38bdf8"
         secondary="#a78bfa"
@@ -25,7 +25,6 @@ export default function HomeDevInternal() {
       <AboutDevInternal />
       <FeatureGrid />
       {/* HANYA BAGIAN INI YANG BERUBAH */}
-      
       <Services />
       <Contact />
       <Footer />

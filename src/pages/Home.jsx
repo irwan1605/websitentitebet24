@@ -9,7 +9,7 @@ import Footer from "../components/Footer.jsx";
 
 // import background animasi
 import NAYAAnimatedBiometricBackground from "../components/NAYAAnimatedBiometricBackground.jsx";
-import AboutDevInternal from "../components/AboutDevInternal.jsx";
+
 
 export default function Home() {
   return (
@@ -27,8 +27,7 @@ export default function Home() {
       {/* konten website */}
       <Header />  
       <Hero />   
-      <About />
-      <AboutDevInternal />
+      <About />   
       <FeatureGrid />
       <Services />
       <Contact />
