@@ -149,29 +149,54 @@ export const dictionaries = {
       },
     },
 
-    // ---- SERVICES ----
+    // ---- SERVICES (Cards + slider + modal) ----
     services: {
       title: "LAYANAN KAMI",
+      sliderTitle: "Showcase Layanan",
       cards: {
-        consult: { title: "Konsultasi & Arsitektur", desc: "Audit kebutuhan, perancangan pipeline, dan PoC cepat." },
-        sdk:     { title: "Integrasi & SDK",        desc: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda." },
-        support: { title: "Operasional & Support",  desc: "Monitoring, pelatihan, dan SLA sesuai kebutuhan." },
+        consult: {
+          title: "Konsultasi & Arsitektur",
+          desc: "Audit kebutuhan, perancangan pipeline, dan PoC cepat.",
+        },
+        bullets: {
+          1: "Optimasi SIMD/NEON, offload GPU/NPU bila tersedia.",
+          2: "Kuantisasi INT8, pruning, dan caching fitur.",
+          3: "Latensi <50 ms untuk verifikasi real-time.",
+          4: "Profiling ujung-ke-ujung & fallback mulus.",
+        },
+        sdk: {
+          title: "Integrasi & SDK",
+          desc: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda.",
+        },
+        support: {
+          title: "Operasional & Support",
+          desc: "Monitoring, pelatihan, dan SLA sesuai kebutuhan.",
+        },
       },
-        slider: {
-          title: "Konsultasi • Integrasi • Operasional",
-          prev: "Sebelumnya",
-          next: "Berikutnya",
-          captions: {
-            consult: "Konsultasi & Arsitektur — Audit kebutuhan, rancang arsitektur, dan PoC cepat bersama tim ahli.",
-            sdk: "Integrasi & SDK — Integrasi kamera, CCTV/VMS, dan SDK lintas platform yang ringan.",
-            support: "Operasional & Support — Monitoring, pelatihan, dan SLA fleksibel sesuai kebutuhan.",
-          }
+      modal: {
+        header: "Detail Layanan",
+        consult: {
+          title: "Konsultasi & Arsitektur",
+          body:
+            "Kami membantu memetakan kebutuhan, menyusun arsitektur solusi end-to-end, menyiapkan PoC, serta memberikan rekomendasi teknologi yang tepat sasaran.",
+        },
+        sdk: {
+          title: "Integrasi & SDK",
+          body:
+            "Integrasikan kamera, CCTV, VMS, dan SDK biometrik kami ke aplikasi Anda dengan cepat. Kami sediakan panduan, contoh kode, dan dukungan teknis.",
+        },
+        support: {
+          title: "Operasional & Support",
+          body:
+            "Layanan pemantauan, pelatihan operator, dan SLA fleksibel. Kami pastikan sistem tetap andal dan terukur di lingkungan produksi.",
+        },
       },
     },
 
     contact: {
       title: "KONTAK KAMI",
       heading: "Hubungi Kami",
+      contactUs: "Hubungi Kami",
       ariaSection: "Kontak Perusahaan",
       addressLabel: "Alamat",
       phoneLabel: "Telepon",
@@ -368,26 +393,45 @@ export const dictionaries = {
     // ---- SERVICES ----
     services: {
       title: "OUR SERVICES",
+      sliderTitle: "Services Showcase",
       cards: {
-        consult: { title: "Consulting & Architecture", desc: "Needs assessment, pipeline design, and rapid PoC." },
-        sdk:     { title: "Integration & SDK",         desc: "Integrate cameras, CCTV/VMS, and cross-platform SDKs." },
-        support: { title: "Operations & Support",      desc: "Monitoring, training, and flexible SLAs." },
+        consult: {
+          title: "Consulting & Architecture",
+          desc: "Needs assessment, pipeline design, and rapid PoC.",
+        },
+        sdk: {
+          title: "Integration & SDK",
+          desc: "Integrate cameras, CCTV, VMS, and SDKs for your applications.",
+        },
+        support: {
+          title: "Operations & Support",
+          desc: "Monitoring, training, and SLAs tailored to your needs.",
+        },
       },
-      slider: {
-        title: "Consulting • Integration • Operations",
-        prev: "Previous",
-        next: "Next",
-        captions: {
-          consult: "Consulting & Architecture — Needs assessment, solution architecture, and rapid PoC.",
-          sdk: "Integration & SDK — Camera, CCTV/VMS integration, and lightweight cross-platform SDKs.",
-          support: "Operations & Support — Monitoring, training, and flexible SLAs to fit your needs.",
-        }
-      }
+      modal: {
+        header: "Service Details",
+        consult: {
+          title: "Consulting & Architecture",
+          body:
+            "We help map requirements, design end-to-end solution architecture, prepare PoCs, and recommend the right technology stack.",
+        },
+        sdk: {
+          title: "Integration & SDK",
+          body:
+            "Quickly integrate cameras, CCTV, VMS, and our biometric SDKs into your apps. We provide guides, code samples, and technical support.",
+        },
+        support: {
+          title: "Operations & Support",
+          body:
+            "Monitoring services, operator training, and flexible SLAs. We ensure reliability and scalability in production environments.",
+        },
+      },
     },
 
     contact: {
       title: "CONTACT US",
       heading: "Contact Us",
+      contactUs: "Contact Us",
       ariaSection: "Company Contact",
       addressLabel: "Address",
       phoneLabel: "Phone",
