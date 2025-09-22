@@ -14,45 +14,15 @@ import {
 import { useLanguage } from "../context/LanguageContext.jsx";
 
 const PALETTES = [
-  {
-    from: "from-sky-500",
-    to: "to-cyan-400",
-    glow: "rgba(56,189,248,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(56,189,248,0.6)]",
-  },
-  {
-    from: "from-violet-500",
-    to: "to-fuchsia-400",
-    glow: "rgba(139,92,246,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(139,92,246,0.6)]",
-  },
-  {
-    from: "from-emerald-500",
-    to: "to-lime-400",
-    glow: "rgba(16,185,129,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(16,185,129,0.55)]",
-  },
-  {
-    from: "from-amber-500",
-    to: "to-orange-400",
-    glow: "rgba(245,158,11,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(245,158,11,0.55)]",
-  },
-  {
-    from: "from-rose-500",
-    to: "to-pink-400",
-    glow: "rgba(244,63,94,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(244,63,94,0.55)]",
-  },
-  {
-    from: "from-indigo-500",
-    to: "to-purple-400",
-    glow: "rgba(99,102,241,0.35)",
-    ring: "shadow-[0_0_50px_-15px_rgba(99,102,241,0.55)]",
-  },
+  { from: "from-sky-500", to: "to-cyan-400", glow: "rgba(56,189,248,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(56,189,248,0.6)]" },
+  { from: "from-violet-500", to: "to-fuchsia-400", glow: "rgba(139,92,246,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(139,92,246,0.6)]" },
+  { from: "from-emerald-500", to: "to-lime-400", glow: "rgba(16,185,129,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(16,185,129,0.55)]" },
+  { from: "from-amber-500", to: "to-orange-400", glow: "rgba(245,158,11,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(245,158,11,0.55)]" },
+  { from: "from-rose-500", to: "to-pink-400", glow: "rgba(244,63,94,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(244,63,94,0.55)]" },
+  { from: "from-indigo-500", to: "to-purple-400", glow: "rgba(99,102,241,0.35)", ring: "shadow-[0_0_50px_-15px_rgba(99,102,241,0.55)]" },
 ];
 
-// Mapping kunci → ikon
+// Mapping kunci → ikon (sinkron dengan dictionaries.js → features.items.*)
 const FEATURE_KEYS = [
   { key: "camera", icon: Camera },
   { key: "monitorsmartphone", icon: MonitorSmartphone },
@@ -62,7 +32,7 @@ const FEATURE_KEYS = [
   { key: "speed", icon: Cpu },
 ];
 
-// helper: aman dari placeholder "⟪missing:…⟫"
+// helper untuk aman dari placeholder "⟪missing:…⟫"
 const isMissing = (s) => typeof s === "string" && s.startsWith("⟪missing:");
 const safe = (s) => (isMissing(s) ? "" : s);
 
@@ -87,7 +57,8 @@ export default function FeatureGrid() {
     const detail =
       safe(t(`features.items.${key}.detail`)) ||
       safe(t(`features.items.${key}.desc`));
-    // Kumpulkan bullet numerik 1..8 (berapa pun yang tersedia di kamus)
+
+    // Bullet numerik 1..8 (opsional)
     const bullets = [];
     for (let i = 1; i <= 8; i++) {
       const b = safe(t(`features.items.${key}.bullets.${i}`));
@@ -128,6 +99,17 @@ export default function FeatureGrid() {
               detail={getModalContent(openKey).detail}
               bullets={getModalContent(openKey).bullets}
               onClose={() => setOpenKey(null)}
+              onContact={() => {
+                // Tutup modal, lalu scroll mulus ke section KONTAK KAMI
+                setOpenKey(null);
+                const el = document.getElementById("kontak");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                } else {
+                  // fallback: set hash agar pindah halaman/anchor
+                  window.location.hash = "#kontak";
+                }
+              }}
             />
           </Modal>
         )}
@@ -198,7 +180,6 @@ function FeatureCard({ index, Icon, title, desc, onOpen }) {
           ].join(" ")}
         >
           <div className="grid h-full w-full place-items-center rounded-2xl bg-white">
-            {/* ikon gelap agar kontras di dasar putih */}
             <Icon className="h-6 w-6 text-slate-700 transition-all duration-300 group-hover:scale-110 group-hover:text-slate-900" />
           </div>
           <div
@@ -253,7 +234,7 @@ function Modal({ children, onClose }) {
 }
 
 /* ---------------- Modal Content ---------------- */
-function ModalContent({ icon: Icon, title, detail, bullets = [], onClose }) {
+function ModalContent({ icon: Icon, title, detail, bullets = [], onClose, onContact }) {
   const { t } = useLanguage();
 
   return (
@@ -297,10 +278,19 @@ function ModalContent({ icon: Icon, title, detail, bullets = [], onClose }) {
           </ul>
         )}
       </div>
-      <div className="h-px w-full bg-white/20 mb-4" />
 
-      {/* Tombol Tutup */}
-      <div className="p-5 pt-0 flex justify-end">
+      {/* Garis putih tipis di atas tombol */}
+      <div className="h-px w-full bg-white/20" />
+
+      {/* Tombol aksi */}
+      <div className="p-5 pt-4 flex items-center justify-end gap-3">
+        <button
+          type="button"
+          onClick={onContact}
+          className="inline-flex items-center gap-2 rounded-xl border border-sky-400/40 bg-white/5 px-4 py-2 text-sm text-sky-200 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-sky-300"
+        >
+          {t("contact.contactUs", "Hubungi Kami")}
+        </button>
         <button
           type="button"
           onClick={onClose}
