@@ -28,7 +28,6 @@ export default function Home() {
       <Header />  
       <Hero />   
       <About />
-    
       <FeatureGrid />
       <Services />
       <Contact />

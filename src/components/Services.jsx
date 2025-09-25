@@ -13,7 +13,8 @@ import {
   LifeBuoy,
   ChevronLeft,
   ChevronRight,
-  X, // ← penting: ikon close modal
+  X,
+  CheckCircle,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 
@@ -38,10 +39,14 @@ const PALETTES = [
   },
 ];
 
+// helper aman dari placeholder "⟪missing:…⟫"
+const isMissing = (s) => typeof s === "string" && s.startsWith("⟪missing:");
+const safe = (s) => (isMissing(s) ? "" : s);
+
 export default function Services() {
   const { t } = useLanguage();
 
-  // Susun isi card dari kamus i18n (dua bahasa)
+  // Susun isi card daftar (title/desc ditampilkan pada kartu)
   const CARDS = useMemo(
     () => [
       {
@@ -79,6 +84,26 @@ export default function Services() {
   const [openKey, setOpenKey] = useState(null);
   const current = CARDS.find((c) => c.key === openKey) || null;
 
+  // Ambil konten modal detail dari kamus
+  const getModalContent = useCallback(
+    (key) => {
+      if (!key) return { title: "", detail: "", bullets: [] };
+      const title =
+        safe(t(`services.cards.${key}.modalTitle`)) ||
+        safe(t(`services.cards.${key}.title`));
+      const detail =
+        safe(t(`services.cards.${key}.detail`)) ||
+        safe(t(`services.cards.${key}.desc`));
+      const bullets = [];
+      for (let i = 1; i <= 10; i++) {
+        const b = safe(t(`services.cards.${key}.bullets.${i}`));
+        if (b) bullets.push(b);
+      }
+      return { title, detail, bullets };
+    },
+    [t]
+  );
+
   // Tutup modal via ESC
   const onEsc = useCallback((e) => {
     if (e.key === "Escape") setOpenKey(null);
@@ -91,7 +116,6 @@ export default function Services() {
   // Focus trap + lock scroll ketika modal terbuka
   const modalRef = useRef(null);
   const closeBtnRef = useRef(null);
-
   useEffect(() => {
     if (!current) return;
     const prevOverflow = document.body.style.overflow;
@@ -197,7 +221,7 @@ export default function Services() {
                   ) : null}
                 </div>
                 <h3 id="service-title" className="text-lg font-semibold">
-                  {current.title}
+                  {safe(getModalContent(current.key).title)}
                 </h3>
                 <button
                   ref={closeBtnRef}
@@ -211,10 +235,23 @@ export default function Services() {
               </div>
 
               {/* body */}
-              <div className="p-5">
-                <p className="leading-relaxed text-slate-200/90">
-                  {current.desc}
-                </p>
+              <div className="p-5 space-y-4">
+                {safe(getModalContent(current.key).detail) && (
+                  <p className="leading-relaxed text-slate-200/90">
+                    {safe(getModalContent(current.key).detail)}
+                  </p>
+                )}
+
+                {getModalContent(current.key).bullets.length > 0 && (
+                  <ul className="mt-2 space-y-2">
+                    {getModalContent(current.key).bullets.map((b, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 shrink-0" />
+                        <span className="text-slate-100/95">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               {/* garis putih tipis di atas tombol */}
@@ -339,10 +376,10 @@ function ServiceCard({ card, index, onOpen }) {
   );
 }
 
+/* ================== Slider Mozaik ================== */
 function MosaicSlider({ className = "" }) {
   const { t } = useLanguage();
 
-  // Daftar slide: konsisten dengan 3 kartu
   const SLIDES = useMemo(
     () => [
       {
@@ -376,7 +413,6 @@ function MosaicSlider({ className = "" }) {
     [t]
   );
 
-  // Pengaturan mosaic
   const ROWS = 8;
   const COLS = 14;
   const DURATION = 0.6;
@@ -456,7 +492,7 @@ function MosaicSlider({ className = "" }) {
                 {Array.from({ length: ROWS }).map((_, r) =>
                   Array.from({ length: COLS }).map((__, c) => {
                     const dist = Math.hypot(r - center.r, c - center.c);
-                    const delay = dist * STAGGER;
+                    const delay = dist * 0.012;
                     const bgPosX = (c / (COLS - 1)) * 100;
                     const bgPosY = (r / (ROWS - 1)) * 100;
 
@@ -469,7 +505,7 @@ function MosaicSlider({ className = "" }) {
                             opacity: 1,
                             scale: 1,
                             rotate: 0,
-                            transition: { duration: DURATION, delay },
+                            transition: { duration: 0.6, delay },
                           },
                         }}
                         style={{

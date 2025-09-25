@@ -3,9 +3,7 @@
 // Gunakan via: const { t } = useLanguage(); t("path.to.key")
 
 export const dictionaries = {
-  
   id: {
-
     search: {
       placeholder: "Cari apa saja di situs ini…",
       empty: "Ketik untuk mulai mencari…",
@@ -28,24 +26,60 @@ export const dictionaries = {
     hero: {
       kicker: "Technology Fingerprint dan Iris • NAYA TECHNOLOGICAL INDONESIA",
       welcome: "Selamat Datang di",
-      body:
-        "Kami Perusahaan yang bergerak di bidang teknologi software dan hardware secara global adalah bisnis yang merancang, memproduksi, dan menjual solusi terpadu—perangkat (device/sensor/board) beserta perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual Domestik dan lintas negara.",
+      body: "Kami Perusahaan yang bergerak di bidang teknologi software dan hardware secara global adalah bisnis yang merancang, memproduksi, dan menjual solusi terpadu—perangkat (device/sensor/board) beserta perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual Domestik dan lintas negara.",
       ctaConsult: "Konsultasi Gratis",
       ctaFeatures: "Lihat Fitur",
       implementLine: "Implementasi di perusahaan & institusi publik.",
+      extra: {
+        heading: "Ringkasan Teknis",
+        detail:
+          "Teknologi fingerprint mengekstrak minutiae (ridge ending & bifurcation) dan melakukan pencocokan template menggunakan algoritme yang efisien. Cocok untuk akses kontrol on-prem maupun autentikasi aplikasi.",
+        bullets: {
+          1: "Cepat diproses di perangkat edge",
+          2: "Biaya implementasi relatif ekonomis",
+          3: "Kualitas dipengaruhi kondisi kulit/sensor",
+          4: "Mendukung template ISO/ANSI",
+          5: "Sangat umum untuk absensi & kontrol akses",
+        },
+      },
       scan: {
         heading: "Scanning TECHNOLOGICAL",
         fingerprint: {
           label: "Fingerprint",
           modalTitle: "Teknologi Fingerprint",
-          desc:
-            "Fingerprint mengenali pola minutiae (ridge ending & bifurcation) pada sidik jari. Banyak dipakai untuk absensi, akses kontrol, hingga perbankan karena cepat dan ekonomis.",
+          desc: "Fingerprint mengenali pola minutiae (ridge ending & bifurcation) pada sidik jari. Banyak dipakai untuk absensi, akses kontrol, hingga perbankan karena cepat dan ekonomis.",
+          // Tambahkan di dictionaries.js pada bagian id.hero.scan.fingerprint
+          extra: {
+            heading: "Ringkasan Teknis",
+            detail:
+              "Teknologi fingerprint mengekstrak minutiae (ridge ending & bifurcation) dan melakukan pencocokan template menggunakan algoritme yang efisien. Cocok untuk akses kontrol on-prem maupun autentikasi aplikasi.",
+            bullets: {
+              1: "Cepat diproses di perangkat edge",
+              2: "Biaya implementasi relatif ekonomis",
+              3: "Kualitas dipengaruhi kondisi kulit/sensor",
+              4: "Mendukung template ISO/ANSI",
+              5: "Sangat umum untuk absensi & kontrol akses",
+            },
+          },
         },
+
         iris: {
           label: "Iris",
           modalTitle: "Teknologi Iris",
-          desc:
-            "Iris recognition membaca tekstur unik pada iris menggunakan cahaya NIR. Akurasinya sangat tinggi, cocok untuk skenario keamanan kritikal dan identifikasi massal.",
+          desc: "Iris recognition membaca tekstur unik pada iris menggunakan cahaya NIR. Akurasinya sangat tinggi, cocok untuk skenario keamanan kritikal dan identifikasi massal.",
+          // Tambahkan di dictionaries.js pada bagian id.hero.scan.iris
+          extra: {
+            heading: "Ringkasan Teknis",
+            detail:
+              "Pengenalan iris menggunakan cahaya NIR untuk menangkap pola tekstur kompleks di gelang iris. Akurasi sangat tinggi serta stabil terhadap penuaan, cocok untuk skala populasi besar.",
+            bullets: {
+              1: "Sangat akurat & sulit dipalsukan",
+              2: "Tahan terhadap perubahan usia",
+              3: "Butuh kondisi optik yang memadai",
+              4: "Ideal untuk identifikasi massal",
+              5: "Sering dipakai pada sistem berkeamanan tinggi",
+            },
+          },
         },
       },
       verified: "Fitur terverifikasi oleh NAYA Technological Indonesia",
@@ -55,8 +89,7 @@ export const dictionaries = {
     about: {
       title: "TENTANG KAMI",
       companyTitle: "PT. NAYA TECHNOLOGICAL INDONESIA",
-      body:
-        "Kami Perusahaan yang bergerak di bidang teknologi software dan hardware secara global adalah bisnis yang merancang, memproduksi, dan menjual solusi terpadu—perangkat (device/sensor/board) beserta perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual lintas Domestik dan negara. “Menuju internasional” berarti menyiapkan produk dan operasional agar siap dipasarkan di banyak negara: lokalisasi bahasa/mata uang, arsitektur multi-zona waktu, jaringan mitra/distributor, rantai pasok regional, serta kepatuhan sertifikasi (mis. CE/FCC/RoHS) dan regulasi data (mis. GDPR/PDPA). Model bisnisnya umumnya menggabungkan penjualan perangkat dengan langganan layanan software/SaaS dan pembaruan OTA, sehingga dapat menskalakan pendapatan dan layanan secara konsisten di pasar global",
+      body: "Kami Perusahaan yang bergerak di bidang teknologi software dan hardware secara global adalah bisnis yang merancang, memproduksi, dan menjual solusi terpadu—perangkat (device/sensor/board) beserta perangkat lunak (firmware, aplikasi, cloud/API)—serta mengoperasikan R&D, manufaktur, distribusi, pemasaran, dan dukungan purna jual lintas Domestik dan negara. “Menuju internasional” berarti menyiapkan produk dan operasional agar siap dipasarkan di banyak negara: lokalisasi bahasa/mata uang, arsitektur multi-zona waktu, jaringan mitra/distributor, rantai pasok regional, serta kepatuhan sertifikasi (mis. CE/FCC/RoHS) dan regulasi data (mis. GDPR/PDPA). Model bisnisnya umumnya menggabungkan penjualan perangkat dengan langganan layanan software/SaaS dan pembaruan OTA, sehingga dapat menskalakan pendapatan dan layanan secara konsisten di pasar global",
       galleryAria: "Galeri foto perusahaan",
       slide: "Slide",
       prev: "Sebelumnya",
@@ -79,6 +112,7 @@ export const dictionaries = {
             2: "Konektivitas USB/Serial/Ethernet/Wi-Fi; protokol RTSP/ONVIF/MQTT.",
             3: "Sertifikasi CE/FCC/RoHS; panduan instalasi & keselamatan.",
             4: "Pembaruan firmware OTA & manajemen perangkat terpusat.",
+            5: "Dukumentasi & sample app lengkap",
           },
         },
         monitorsmartphone: {
@@ -92,6 +126,7 @@ export const dictionaries = {
             2: "Desain manufaktur (DFM/DFA), SOP QC, dan jig pengujian.",
             3: "Dokumentasi teknis: skematik, BOM, gerber, dan datasheet.",
             4: "Pelacakan versi & jejak unit (serial number / lot).",
+            5: "Skema lisensi fleksibel (per device/seat/API)",
           },
         },
         linechart: {
@@ -105,6 +140,7 @@ export const dictionaries = {
             2: "Aset pemasaran: brand kit, brosur, video, dan demo app.",
             3: "Skema garansi, proses RMA, dan pusat layanan.",
             4: "Laporan penjualan & analitik kanal.",
+            5: "Kepatuhan GDPR/PDPA & kebijakan retensi data",
           },
         },
         security: {
@@ -118,6 +154,7 @@ export const dictionaries = {
             2: "RBAC, SSO/OIDC, dan rotasi kredensial/secret.",
             3: "Audit log, tamper detection, dan alerting.",
             4: "Kepatuhan GDPR/PDPA; opsi on-prem.",
+            5: "TLS 1.2+ / HTTPS untuk seluruh koneksi & kebijakan retensi data",
           },
         },
         accuracy: {
@@ -131,6 +168,7 @@ export const dictionaries = {
             2: "Kalibrasi perangkat & normalisasi pencahayaan.",
             3: "Anti-spoof/liveness untuk cegah penipuan.",
             4: "Benchmark berkala & laporan akurasi.",
+            5: "Kalibrasi berkala untuk menjaga performa",
           },
         },
         speed: {
@@ -144,6 +182,7 @@ export const dictionaries = {
             2: "Kuantisasi INT8, pruning, dan caching fitur.",
             3: "Latensi <50 ms untuk verifikasi real-time.",
             4: "Profiling ujung-ke-ujung & fallback mulus.",
+            5: "Skala horizontal untuk beban tinggi",
           },
         },
       },
@@ -156,28 +195,57 @@ export const dictionaries = {
         consult: {
           title: "Konsultasi & Arsitektur",
           desc: "Audit kebutuhan, perancangan pipeline, dan PoC cepat.",
+          modalTitle: "Konsultasi & Arsitektur — Dari Audit hingga PoC",
+          detail:
+            "Tim kami membantu memetakan kebutuhan bisnis & teknis, menyusun arsitektur data/AI, dan merancang pipeline end-to-end. Kami mengawal dari fase discovery, desain, hingga PoC/pilot agar keputusan investasi tepat dan risiko implementasi rendah.",
+          bullets: {
+            1: "Discovery & audit kebutuhan dengan stakeholder lintas tim",
+            2: "Blueprint arsitektur (data flow, komponen, integrasi pihak ketiga)",
+            3: "Rencana skalabilitas, keamanan, dan kepatuhan",
+            4: "PoC cepat dengan metrik keberhasilan yang terukur",
+            5: "Dokumentasi rekomendasi & roadmap implementasi",
+          },
         },
         sdk: {
           title: "Integrasi & SDK",
           desc: "Integrasi kamera, CCTV, VMS, dan SDK untuk aplikasi Anda.",
+          modalTitle: "Integrasi & SDK — Plug-in ke Sistem Anda",
+          detail:
+            "Kami sediakan SDK lintas platform dengan contoh kode & adaptor untuk VMS/CCTV, aplikasi mobile/desktop, serta REST/Realtime API. Proses integrasi dipercepat lewat toolkit, panduan best practice, dan pendampingan langsung tim engineer.",
+          bullets: {
+            1: "SDK ringan: C/C++, Java/Kotlin (Android), Swift (iOS), dan Web",
+            2: "Adaptor untuk VMS/CCTV populer & pipeline video real-time",
+            3: "Contoh kode & template proyek produksi",
+            4: "Panduan performa (profiling, batching, hardware accel.)",
+            5: "Dukungan integrasi hingga go-live",
+          },
         },
         support: {
           title: "Operasional & Support",
           desc: "Monitoring, pelatihan, dan SLA sesuai kebutuhan.",
+          modalTitle: "Operasional & Support — Menjaga Sistem Tetap Prima",
+          detail:
+            "Kami memantau, melatih, dan memberikan SLA sesuai kebutuhan. Mulai dari health-check berkala, update versi, sampai incident response terkoordinasi agar layanan stabil dan berkelanjutan.",
+          bullets: {
+            1: "Monitoring & alerting terpadu (kinerja, kesehatan layanan)",
+            2: "Pelatihan operator & transfer knowledge tim internal",
+            3: "SLA fleksibel (jam layanan, waktu respons & pemulihan)",
+            4: "Pembaruan versi terjadwal & roll-back aman",
+            5: "Incident management & post-mortem dokumentasi",
+          },
         },
       },
       slider: {
         title: "Konsultasi • Integrasi • Operasional",
-        prev: "Sebelumnya",
-        next: "Berikutnya",
         captions: {
           consult:
             "Konsultasi & Arsitektur — Audit kebutuhan, rancang arsitektur, dan PoC cepat bersama tim ahli.",
-          sdk:
-            "Integrasi & SDK — Integrasi kamera, CCTV/VMS, dan SDK lintas platform yang ringan.",
+          sdk: "Integrasi & SDK — Integrasi kamera, CCTV/VMS, dan SDK lintas platform yang ringan.",
           support:
             "Operasional & Support — Monitoring, pelatihan, dan SLA fleksibel sesuai kebutuhan.",
         },
+        prev: "Sebelumnya",
+        next: "Berikutnya",
       },
     },
 
@@ -234,7 +302,6 @@ export const dictionaries = {
   // =====================================================================
 
   en: {
-
     search: {
       placeholder: "Search anything on this site…",
       empty: "Type to start searching…",
@@ -257,8 +324,7 @@ export const dictionaries = {
     hero: {
       kicker: "Biometric Technology • NAYA TECHNOLOGICAL INDONESIA",
       welcome: "Welcome to",
-      body:
-        "We operate globally across software and hardware: designing, manufacturing, and delivering integrated solutions—devices (sensors/boards) together with software (firmware, apps, cloud/APIs)—while running R&D, manufacturing, distribution, marketing, and after-sales support across countries.",
+      body: "We operate globally across software and hardware: designing, manufacturing, and delivering integrated solutions—devices (sensors/boards) together with software (firmware, apps, cloud/APIs)—while running R&D, manufacturing, distribution, marketing, and after-sales support across countries.",
       ctaConsult: "Free Consultation",
       ctaFeatures: "See Features",
       implementLine: "Deployed in enterprises & public institutions.",
@@ -267,14 +333,38 @@ export const dictionaries = {
         fingerprint: {
           label: "Fingerprint",
           modalTitle: "Fingerprint Technology",
-          desc:
-            "Fingerprint recognizes minutiae patterns (ridge endings & bifurcations). Popular for attendance, access control, and banking thanks to its speed and cost-efficiency.",
+          desc: "Fingerprint recognizes minutiae patterns (ridge endings & bifurcations). Popular for attendance, access control, and banking thanks to its speed and cost-efficiency.",
+          // Tambahkan di dictionaries.js pada bagian en.hero.scan.fingerprint
+          extra: {
+            heading: "Technical Summary",
+            detail:
+              "Fingerprint tech extracts minutiae (ridge endings & bifurcations) and matches templates with efficient algorithms. Suitable for on-prem access control and app authentication.",
+            bullets: {
+              1: "Fast on edge devices",
+              2: "Relatively low deployment cost",
+              3: "Quality depends on skin/sensor condition",
+              4: "Supports ISO/ANSI templates",
+              5: "Common for attendance & access control",
+            },
+          },
         },
         iris: {
           label: "Iris",
           modalTitle: "Iris Technology",
-          desc:
-            "Iris recognition reads the unique iris texture using NIR illumination. Extremely accurate, ideal for critical security and large-scale identification.",
+          desc: "Iris recognition reads the unique iris texture using NIR illumination. Extremely accurate, ideal for critical security and large-scale identification.",
+          // Tambahkan di dictionaries.js pada bagian en.hero.scan.iris
+          extra: {
+            heading: "Technical Summary",
+            detail:
+              "Iris recognition uses NIR illumination to capture rich iris textures. Delivers very high accuracy and is stable over time, ideal for large-scale identification.",
+            bullets: {
+              1: "Highly accurate & hard to spoof",
+              2: "Robust to aging",
+              3: "Requires proper optics/lighting",
+              4: "Ideal for mass identification",
+              5: "Used in high-security deployments",
+            },
+          },
         },
       },
       verified: "Feature verified by NAYA Technological Indonesia",
@@ -284,8 +374,7 @@ export const dictionaries = {
     about: {
       title: "ABOUT US",
       companyTitle: "PT. NAYA TECHNOLOGICAL INDONESIA",
-      body:
-        "We operate globally in software and hardware—designing, producing, and delivering integrated solutions (devices with software) while running R&D, manufacturing, distribution, marketing, and after-sales across countries. Going international means preparing products and operations for multi-country markets: localization, multi-timezone architecture, partner/distributor networks, regional supply chains, and compliance with certifications (e.g., CE/FCC/RoHS) and data regulations (e.g., GDPR/PDPA). The model typically combines device sales with software/SaaS subscriptions and OTA updates to scale revenue worldwide.",
+      body: "We operate globally in software and hardware—designing, producing, and delivering integrated solutions (devices with software) while running R&D, manufacturing, distribution, marketing, and after-sales across countries. Going international means preparing products and operations for multi-country markets: localization, multi-timezone architecture, partner/distributor networks, regional supply chains, and compliance with certifications (e.g., CE/FCC/RoHS) and data regulations (e.g., GDPR/PDPA). The model typically combines device sales with software/SaaS subscriptions and OTA updates to scale revenue worldwide.",
       galleryAria: "Company photo gallery",
       slide: "Slide",
       prev: "Previous",
@@ -293,8 +382,8 @@ export const dictionaries = {
       gotoSlide: "Go to slide",
     },
 
-     // ---- FEATURES ----
-     features: {
+    // ---- FEATURES ----
+    features: {
       title: "OUR FEATURES",
       items: {
         camera: {
@@ -308,6 +397,7 @@ export const dictionaries = {
             2: "USB/Serial/Ethernet/Wi-Fi connectivity; RTSP/ONVIF/MQTT protocols.",
             3: "CE/FCC/RoHS compliance; installation & safety guides.",
             4: "OTA firmware updates & centralized device management.",
+            5: "Ready-to-use integrations to apps & cloud/APIs",
           },
         },
         monitorsmartphone: {
@@ -321,6 +411,7 @@ export const dictionaries = {
             2: "Manufacturing design (DFM/DFA), QC SOPs, and test jigs.",
             3: "Technical docs: schematics, BOM, gerbers, and datasheets.",
             4: "Versioning & unit traceability (serial number / lot).",
+            5: "Complete docs & sample apps",
           },
         },
         linechart: {
@@ -334,6 +425,7 @@ export const dictionaries = {
             2: "Marketing assets: brand kit, brochures, videos, and demo apps.",
             3: "Warranty, RMA workflows, and service centers.",
             4: "Sales reporting and channel analytics.",
+            5: "Flexible licensing (per device/seat/API)",
           },
         },
         security: {
@@ -347,6 +439,7 @@ export const dictionaries = {
             2: "RBAC, SSO/OIDC, and secret rotation.",
             3: "Audit logs, tamper detection, and alerting.",
             4: "GDPR/PDPA compliance; on-prem option.",
+            5: "TLS 1.2+ / HTTPS for all connections & data retention policies",
           },
         },
         accuracy: {
@@ -360,6 +453,7 @@ export const dictionaries = {
             2: "Device calibration & illumination normalization.",
             3: "Anti-spoof/liveness to prevent fraud.",
             4: "Regular benchmarks & accuracy reports.",
+            5: "Periodic calibration to sustain performance",
           },
         },
         speed: {
@@ -373,6 +467,7 @@ export const dictionaries = {
             2: "INT8 quantization, pruning, and feature caching.",
             3: "<50 ms latency for real-time verification.",
             4: "End-to-end profiling and graceful fallbacks.",
+            5: "Horizontal scaling for high throughput",
           },
         },
       },
@@ -385,29 +480,57 @@ export const dictionaries = {
         consult: {
           title: "Consulting & Architecture",
           desc: "Needs assessment, pipeline design, and rapid PoC.",
+          modalTitle: "Consulting & Architecture — From Audit to PoC",
+          detail:
+            "We help map business & technical needs, design data/AI architectures, and build end-to-end pipelines. From discovery and design to PoC/pilot, we reduce implementation risk and improve investment outcomes.",
+          bullets: {
+            1: "Discovery & needs audit with cross-team stakeholders",
+            2: "Architecture blueprint (data flow, components, 3rd-party integrations)",
+            3: "Scalability, security, and compliance planning",
+            4: "Rapid PoC with measurable success metrics",
+            5: "Recommendations & implementation roadmap",
+          },
         },
         sdk: {
           title: "Integration & SDK",
-          desc:
-            "Integrate cameras, CCTV, VMS, and SDKs for your applications.",
+          desc: "Integrate cameras, CCTV, VMS, and SDKs for your applications.",
+          modalTitle: "Integration & SDK — Plug into Your Stack",
+          detail:
+            "Cross-platform SDKs with samples and adapters for VMS/CCTV, mobile/desktop apps, plus REST/Realtime APIs. Integration is accelerated with tooling, best-practice guides, and hands-on engineering support.",
+          bullets: {
+            1: "Lightweight SDKs: C/C++, Java/Kotlin (Android), Swift (iOS), and Web",
+            2: "Adapters for popular VMS/CCTV & real-time video pipelines",
+            3: "Production-grade sample code & project templates",
+            4: "Performance guides (profiling, batching, hardware accel.)",
+            5: "Integration support through go-live",
+          },
         },
         support: {
           title: "Operations & Support",
           desc: "Monitoring, training, and SLAs tailored to your needs.",
+          modalTitle: "Operations & Support — Keep Systems in Top Shape",
+          detail:
+            "We provide monitoring, training, and flexible SLAs. From periodic health-checks and version updates to coordinated incident response, we keep your service stable and sustainable.",
+          bullets: {
+            1: "Unified monitoring & alerting (performance and service health)",
+            2: "Operator training & knowledge transfer to internal teams",
+            3: "Flexible SLAs (service hours, response & recovery time)",
+            4: "Scheduled releases and safe roll-backs",
+            5: "Incident management & post-mortem documentation",
+          },
         },
       },
       slider: {
         title: "Consulting • Integration • Operations",
-        prev: "Previous",
-        next: "Next",
         captions: {
           consult:
             "Consulting & Architecture — Needs assessment, architecture design, and rapid PoC with our expert team.",
-          sdk:
-            "Integration & SDK — Integrate cameras, CCTV/VMS, and lightweight cross-platform SDKs.",
+          sdk: "Integration & SDK — Integrate cameras, CCTV/VMS, and lightweight cross-platform SDKs.",
           support:
             "Operations & Support — Monitoring, training, and flexible SLAs tailored to your needs.",
         },
+        prev: "Previous",
+        next: "Next",
       },
     },
 

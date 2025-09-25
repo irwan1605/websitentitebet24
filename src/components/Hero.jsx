@@ -16,7 +16,6 @@ export default function Hero() {
   const searchWrapRef = useRef(null);
 
   const SECTION_IDS = ["beranda", "tentang", "fitur", "layanan", "kontak"];
-
   const titleForId = (id) => {
     switch (id) {
       case "beranda":
@@ -41,7 +40,7 @@ export default function Hero() {
       return { id, title: titleForId(id), text };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]); // ketika bahasa berubah, judul juga ikut berubah
+  }, [t]);
 
   const highlight = (text, q) => {
     if (!q) return text;
@@ -61,7 +60,6 @@ export default function Hero() {
     const qLower = q.toLowerCase();
     let pos = text.toLowerCase().indexOf(qLower);
     if (pos < 0) {
-      // coba pakai kata pertama
       const first = qLower.split(/\s+/)[0] || "";
       pos = text.toLowerCase().indexOf(first);
     }
@@ -110,7 +108,6 @@ export default function Hero() {
     [buildIndex]
   );
 
-  // debounce ringan
   useEffect(() => {
     const id = setTimeout(() => runSearch(query), 120);
     return () => clearTimeout(id);
@@ -174,7 +171,6 @@ export default function Hero() {
   const [openKey, setOpenKey] = useState(null);
   const current = scanItems.find((s) => s.key === openKey) || null;
 
-  // --- A11y: ESC untuk tutup
   const onEsc = useCallback((e) => {
     if (e.key === "Escape") setOpenKey(null);
   }, []);
@@ -183,16 +179,14 @@ export default function Hero() {
     return () => document.removeEventListener("keydown", onEsc);
   }, [onEsc]);
 
-  // --- A11y: Focus trap & kunci scroll saat modal terbuka
+  // Focus trap & body scroll lock
   const modalRef = useRef(null);
   const closeBtnRef = useRef(null);
   useEffect(() => {
     if (!current) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const to = setTimeout(() => {
-      closeBtnRef.current?.focus();
-    }, 0);
+    const to = setTimeout(() => closeBtnRef.current?.focus(), 0);
 
     const handleTabTrap = (e) => {
       if (e.key !== "Tab" || !modalRef.current) return;
@@ -223,6 +217,21 @@ export default function Hero() {
     };
   }, [current]);
 
+  // helper: ambil detail & bullets aman dari kamus
+  const safe = (s) =>
+    typeof s === "string" && s.startsWith("⟪missing:") ? "" : s;
+
+  const getExtra = (key) => {
+    const heading = safe(t(`hero.scan.${key}.extra.heading`));
+    const detail = safe(t(`hero.scan.${key}.extra.detail`));
+    const bullets = [];
+    for (let i = 1; i <= 10; i++) {
+      const b = safe(t(`hero.scan.${key}.extra.bullets.${i}`));
+      if (b) bullets.push(b);
+    }
+    return { heading, detail, bullets };
+  };
+
   return (
     <section
       id="beranda"
@@ -238,7 +247,7 @@ export default function Hero() {
         overlayOpacity={0.55}
       />
 
-      {/* ======= SEARCH BAR: TOP-CENTER WITH GLOW ======= */}
+      {/* ======= SEARCH BAR ======= */}
       <div
         ref={searchWrapRef}
         onMouseMove={onGlowMove}
@@ -249,23 +258,16 @@ export default function Hero() {
           borderRadius: "1rem",
         }}
       >
-       <div className="relative rounded-2xl bg-white/20 dark:bg-slate-900/70 backdrop-blur px-4 py-3 ring-1 ring-white/30 dark:ring-white/10">
+        <div className="relative rounded-2xl bg-white/20 dark:bg-slate-900/70 backdrop-blur px-4 py-3 ring-1 ring-white/30 dark:ring-white/10">
           <div className="relative rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur px-3 py-2 ring-1 ring-white/30 dark:ring-white/10">
             <div className="flex items-center gap-2">
               <Search className="h-5 w-5 text-slate-500 dark:text-slate-300" />
               <input
                 value={query}
-                textColor ="black"
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onSearchKey}
-                placeholder={t(
-                  "search.placeholder",
-                  "Cari apa saja di halaman…"
-                )}
-                aria-label={t(
-                  "search.placeholder",
-                  "Cari apa saja di halaman…"
-                )}
+                placeholder={t("search.placeholder", "Cari apa saja di halaman…")}
+                aria-label={t("search.placeholder", "Cari apa saja di halaman…")}
                 className="w-full bg-transparent outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 text-slate-800 dark:text-slate-100 text-sm md:text-base"
               />
               {query && (
@@ -376,7 +378,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05, duration: 0.4 }}
-          className="rounded-3xl border border-slate-200/30 bg-white/80 shadow-sm overflow-hidden backdrop-blur-sm"
+          className="rounded-3xl border border-slate-200/30 bg-white/5 shadow-sm overflow-hidden backdrop-blur-sm"
         >
           <div className="aspect-[16] grid md:grid-cols-2">
             {/* Panel kiri */}
@@ -457,6 +459,7 @@ export default function Hero() {
               className="relative z-10 w-full max-w-lg rounded-2xl border border-white/15 bg-gradient-to-b from-slate-900/90 to-slate-800/90 text-slate-100 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Header */}
               <div className="flex items-center gap-3 p-5 border-b border-white/10">
                 <div className="h-10 w-10 rounded-xl bg-white/5 grid place-items-center ring-1 ring-white/10 shadow-inner">
                   <img
@@ -479,10 +482,43 @@ export default function Hero() {
                 </button>
               </div>
 
-              <div className="p-5">
+              {/* Body */}
+              <div className="p-5 space-y-4">
+                {/* Deskripsi singkat */}
                 <p id="tech-desc" className="leading-relaxed text-slate-200/90">
                   {current.desc}
                 </p>
+
+                {/* Narasi detail + bullets (baru) */}
+                {(() => {
+                  const { heading, detail, bullets } = getExtra(current.key);
+                  return (
+                    <>
+                      {(heading || detail || bullets.length > 0) && (
+                        <div className="mt-3">
+                          {heading && (
+                            <div className="text-sm font-semibold text-sky-300 tracking-wide">
+                              {heading}
+                            </div>
+                          )}
+                          {detail && (
+                            <p className="mt-1 text-slate-200/90">{detail}</p>
+                          )}
+                          {bullets.length > 0 && (
+                            <ul className="mt-3 space-y-2">
+                              {bullets.map((b, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                  <CheckCircle className="h-5 w-5 text-emerald-400 mt-0.5 shrink-0" />
+                                  <span className="text-slate-100/95">{b}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
 
                 <div className="mt-5 flex items-center gap-2 text-emerald-400">
                   <CheckCircle className="h-5 w-5" />
@@ -490,7 +526,9 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="p-5 pt-0">
+              {/* Divider + Actions */}
+              <div className="h-px w-full bg-white/10" />
+              <div className="p-5 pt-4 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setOpenKey(null)}
@@ -500,6 +538,7 @@ export default function Hero() {
                 </button>
               </div>
 
+              {/* Glow frame */}
               <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 shadow-[0_0_60px_rgba(56,189,248,0.2)]" />
             </motion.div>
           </motion.div>
