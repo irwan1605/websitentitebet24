@@ -10,7 +10,7 @@ export default function Contact({
   address = "JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapUrl = "https://maps.google.com/?q=JL. TEBET RAYA NO.24, SOUTH JAKARTA",
   mapEmbedUrl, // opsional: jika tak disediakan, dibuat otomatis dari address
-  email = "contact@nayatechnologi.id",
+  email = "nayatech.id",
   phone = "+62 21 38825307",
 
   // 🔧 Posisi marker dalam persen relatif ke kartu peta (default kira2 pusat)
